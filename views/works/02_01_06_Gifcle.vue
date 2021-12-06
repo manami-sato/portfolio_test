@@ -1,15 +1,15 @@
 <template lang="pug">
 	main
-	  DetailedExplanation(value="9")
+	  Data(value="8")
 </template>
 
 <script>
-import DetailedExplanation from "@/components/DetailedExplanation.vue";
+import Data from "@/components/Data.vue";
 export default {
   name: "Gifcle",
   el: "main",
   components: {
-    DetailedExplanation,
+    Data,
   },
 };
 </script>

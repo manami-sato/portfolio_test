@@ -45,9 +45,9 @@
 				p
 					|趣味：カメラです！桜と紅葉の時季には必ず撮影に行きます！
 			div.index__profile--link
-				a(href="#")
+				a(href="https://github.com/manami-sato",target="_blank")
 					span GitHub
-				a(href="https://click.ecc.ac.jp/ecc/msatou/Philosophia/" target="_blank")
+				a(href="https://click.ecc.ac.jp/ecc/msatou/Philosophia/",target="_blank")
 					span photography's portfolio
 		section.index__rcm#works
 			div
@@ -58,7 +58,7 @@
 					|2行になる程度
 				div
 					h3.index__rcm--ttl {{rcmTitle}}
-					p.index__rcm--catchphrase #きもちを贈り合うサブスクリプション
+					p.index__rcm--catchphrase  {{rcmCatchphrase}}
 				p.index__rcm--txt {{rcmText}}
 				div.index__rcm--lang
 					span 使用言語：
@@ -109,6 +109,7 @@ export default {
       worksBnrNum: 0,
       rcmSort: "",
       rcmTitle: "",
+      rcmCatchphrase: "",
       rcmText: "",
       rcmLang: "",
       rcmURL: "",
@@ -134,6 +135,7 @@ export default {
         this.rcmData = this.res.length - 1;
         this.rcmSort = this.res[this.rcmData].sort;
         this.rcmTitle = this.res[this.rcmData].title;
+        this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
         this.rcmText = this.res[this.rcmData].text;
         this.rcmLang = this.res[this.rcmData].lang;
         this.rcmURL = this.res[this.rcmData].URL;
@@ -244,7 +246,7 @@ fvここから
     width: 24px;
     margin-right: 8px;
     position: relative;
-    animation: fvMouseMove 3s ease-in-out infinite;
+    animation: fvMouseMove 2.8s ease-in-out infinite;
     animation-delay: 2s;
     & + div {
       font-family: $font;
@@ -342,7 +344,7 @@ fvここまで
     p {
       line-height: 24px;
       margin-top: 16px;
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         font-weight: bold;
         margin: 0;
       }
@@ -354,12 +356,12 @@ fvここまで
     display: flex;
     justify-content: space-around;
     a {
-      &:first-child {
+      &:first-of-type {
         @include btn();
         width: 40%;
         @include btnHoverAction();
       }
-      &:last-child {
+      &:last-of-type {
         @include btn($white, $mainColor);
         width: 55%;
         @include btnHoverAction($mainColor, $baceColor);
@@ -381,7 +383,7 @@ fvここまで
   @include worksPreset();
   @include throughTtl("</recommend works>", 12%, auto, auto, -3%);
   padding-top: 144px;
-  > div:first-child {
+  > div:first-of-type {
     width: 45%;
   }
   &--img {
@@ -431,20 +433,20 @@ fvここまで
         bottom: 0;
         left: 0;
         transition: 0.2s opacity;
-        &:first-child {
+        &:first-of-type {
           opacity: 1;
         }
-        &:last-child {
+        &:last-of-type {
           opacity: 0;
         }
       }
       &:hover {
         // width: 110%;
         img {
-          &:first-child {
+          &:first-of-type {
             opacity: 0;
           }
-          &:last-child {
+          &:last-of-type {
             opacity: 1;
           }
         }

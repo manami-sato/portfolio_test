@@ -10,7 +10,7 @@
 				h2.web__contents--appeal がんばったこと
 				div.web__contents--info
 					h3.web__contents--ttl {{data.title}}
-					p.web__contents--catchphrase #きもちを贈り合うサブスクリプション
+					p.web__contents--catchphrase {{data.catchphrase}}
 				p.web__contents--txt {{data.text}}
 				div.web__contents--lang
 					span 使用言語
@@ -20,8 +20,9 @@
 						span Web site
 					a(:href="`https://github.com/manami-sato/${data.URL}/`",target="github")
 						span GitHub
-					a(:href="`/${data.URL}`",target="page")
+					div(@click="newTab(i)")
 						span more
+					//- a(:href="`/${data.URL}`",target="page")
 		div.test
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",v-if="getSortNum == data.year",class="contentsActive",ref="item",:style="{order:worksOrder - i}").web__contents
 				div.web__contents--img
@@ -33,7 +34,7 @@
 						|がんばったこと
 					div.web__contents--info
 						h3.web__contents--ttl {{data.title}}
-						p.web__contents--catchphrase #きもちを贈り合うサブスクリプション
+						p.web__contents--catchphrase {{data.catchphrase}}
 					p.web__contents--txt {{data.text}}
 					div.web__contents--lang
 						span 使用言語
@@ -43,7 +44,7 @@
 							span Web site
 						a(:href="`https://github.com/manami-sato/${data.URL}/`",target="github")
 							span GitHub
-						a(:href="`/${data.URL}`",target="page")
+						div(@click="newTab")
 							span more
 		div(v-if="getSortNum == 3")
 			p.graphic__none coming soon...
@@ -68,7 +69,7 @@ export default {
     title() {
       return {
         inner: "Web",
-        separator: "|",
+        separator: "｜",
         complement: "佐藤真奈実's Portfolio",
       };
     },
@@ -91,6 +92,9 @@ export default {
       console.log(i);
       this.selectedNumber = i;
       console.log(this.selectedNumber);
+    },
+    newTab(i) {
+      open(`/${this.res[i].URL}`);
     },
   },
   watch: {
@@ -198,7 +202,7 @@ export default {
       margin-bottom: 16px;
       border-radius: 8px;
       transition: 0.2s background;
-      &:last-child {
+      &:last-of-type {
         margin: 0;
       }
       &:hover {
@@ -252,7 +256,14 @@ export default {
     }
   }
   .web__contents--info {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    h3 {
+      order: 2;
+    }
+    p {
+      order: 1;
+    }
   }
   .web__contents--appeal {
     display: none;
@@ -264,21 +275,22 @@ export default {
     display: grid;
     grid-template-columns: 48% 48%;
     grid-template-rows: auto auto;
-    grid-gap: 4%;
+    grid-gap: 8px 4%;
     a {
       width: 100%;
-      &:nth-child(1) {
+      &:nth-of-type(1) {
         grid-column: 1;
         grid-row: 1;
       }
-      &:nth-child(2) {
+      &:nth-of-type(2) {
         grid-column: 2;
         grid-row: 1;
       }
-      &:nth-child(3) {
-        grid-column: 1/3;
-        grid-row: 2;
-      }
+    }
+    div {
+      width: 100%;
+      grid-column: 1/3;
+      grid-row: 2;
     }
   }
 }

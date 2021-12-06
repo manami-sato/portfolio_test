@@ -31,7 +31,7 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 120px 0 144px;
+  padding: 120px 0;
   &--txt {
     display: flex;
     color: $mainColor;
@@ -57,7 +57,9 @@ export default {
     }
   }
   &--mail {
-    width: 600px;
+    width: 60vw;
+    max-width: 600px;
+    min-width: 480px;
     height: 72px;
     display: block;
     display: flex;
@@ -65,14 +67,19 @@ export default {
     align-items: center;
     @include btn($fs: 2.4rem, $h: 72px);
     @include btnHoverAction($white, $mainColor);
+    margin: 0;
   }
 }
 .foot__link {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90vw;
-  margin: 0 auto;
+  height: 200px;
+  background: url("~@/assets/img/foot.png");
+  background-size: contain;
+  background-position: center bottom -1px;
+  background-repeat: repeat no-repeat;
+  padding: 0 5vw 104px;
   ul {
     display: flex;
     font-family: $font;
@@ -83,7 +90,7 @@ export default {
       justify-content: center;
       align-items: center;
       margin-right: 40px;
-      &:first-child {
+      &:first-of-type {
         width: 200px;
         height: 80%;
         a {
@@ -122,8 +129,11 @@ small {
   justify-content: center;
   align-items: flex-start;
   width: 100vw;
-  height: 64px;
-  color: $mainColor;
+  height: 88px;
+  // color: $mainColor;
+  color: $baceColor;
+  background: $mainColor;
   font-family: $font;
+  padding-top: 24px;
 }
 </style>

@@ -26,7 +26,7 @@ export default {
     title() {
       return {
         inner: "Training",
-        separator: "|",
+        separator: "｜",
         complement: "佐藤真奈実's Portfolio",
       };
     },

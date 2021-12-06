@@ -38,7 +38,7 @@ $font: "Montserrat Alternates", sans-serif;
     transform: skewX(20deg);
     padding: 0 12px;
   }
-  // &:last-child {
+  // &:last-of-type {
   //   margin: 0;
   // }
 }
@@ -85,7 +85,7 @@ $font: "Montserrat Alternates", sans-serif;
   display: $d1;
   justify-content: space-around;
   align-items: center;
-  &:first-child {
+  &:first-of-type {
     margin: 0 auto;
   }
   &--sort {
@@ -103,10 +103,10 @@ $font: "Montserrat Alternates", sans-serif;
       border-radius: 16px;
       padding: 0 16px;
       margin: 4px 8px 4px 0;
-      &:last-child {
+      &:last-of-type {
         margin: 4px 0;
       }
-      &:nth-child(3) {
+      &:nth-of-type(3) {
         background: $mainDarkenColor;
         color: $white;
       }
@@ -136,18 +136,18 @@ $font: "Montserrat Alternates", sans-serif;
   &--lang {
     margin: 0 0 24px;
     span {
-      &:first-child {
+      &:first-of-type {
         &::after {
           content: "：";
         }
       }
-      &:last-child {
+      &:last-of-type {
         &::after {
           content: "";
         }
       }
       &::after {
-        content: "、";
+        content: "／";
       }
     }
   }
@@ -162,16 +162,17 @@ $font: "Montserrat Alternates", sans-serif;
         $h: 48px
       );
       @include btnHoverAction($c: $accentColor);
-      &:last-child {
-        width: 20%;
-        @include btn(
-          $bg: $white,
-          $c: $accentColor,
-          $b: 3px solid $accentColor,
-          $h: 48px
-        );
-        @include btnHoverAction($accentColor, $white);
-      }
+    }
+    div {
+      width: 20%;
+      cursor: pointer;
+      @include btn(
+        $bg: $white,
+        $c: $accentColor,
+        $b: 3px solid $accentColor,
+        $h: 48px
+      );
+      @include btnHoverAction($accentColor, $white);
     }
   }
 }

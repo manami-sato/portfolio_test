@@ -72,11 +72,11 @@ export default {
       font-size: 2.4rem;
       opacity: 0.7;
       transition: 0.2s opacity;
-      &:first-child {
+      &:first-of-type {
         grid-column: 1;
         grid-row: 2;
       }
-      &:last-child {
+      &:last-of-type {
         grid-column: 2;
         grid-row: 2;
       }
@@ -106,7 +106,7 @@ export default {
         background: $baceColor;
         color: $mainColor;
       }
-      &:last-child {
+      &:last-of-type {
         margin: 0;
       }
     }

@@ -1,15 +1,15 @@
 <template lang="pug">
 	main
-	  DetailedExplanation(value="0")
+	  Data(value="0")
 </template>
 
 <script>
-import DetailedExplanation from "@/components/DetailedExplanation.vue";
+import Data from "@/components/Data.vue";
 export default {
   name: "Koka",
   el: "main",
   components: {
-    DetailedExplanation,
+    Data,
   },
 };
 </script>

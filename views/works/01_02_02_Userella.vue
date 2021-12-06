@@ -1,15 +1,15 @@
 <template lang="pug">
 	main
-	  DetailedExplanation(value="3")
+	  Data(value="3")
 </template>
 
 <script>
-import DetailedExplanation from "@/components/DetailedExplanation.vue";
+import Data from "@/components/Data.vue";
 export default {
   name: "Userella",
   el: "main",
   components: {
-    DetailedExplanation,
+    Data,
   },
 };
 </script>

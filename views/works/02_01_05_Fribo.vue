@@ -1,15 +1,15 @@
 <template lang="pug">
 	main
-	  DetailedExplanation(value="8")
+	  Data(value="7")
 </template>
 
 <script>
-import DetailedExplanation from "@/components/DetailedExplanation.vue";
+import Data from "@/components/Data.vue";
 export default {
   name: "Fribo",
   el: "main",
   components: {
-    DetailedExplanation,
+    Data,
   },
 };
 </script>

@@ -121,7 +121,7 @@ export default {
     title() {
       return {
         inner: "Graphic",
-        separator: "|",
+        separator: "｜",
         complement: "佐藤真奈実's Portfolio",
       };
     },
@@ -145,8 +145,8 @@ export default {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    &:last-child {
-      section:last-child {
+    &:last-of-type {
+      section:last-of-type {
         margin: 0;
       }
     }
@@ -166,7 +166,7 @@ export default {
     justify-content: center;
     flex-direction: column;
     margin-top: 40px;
-    > div:first-child {
+    > div:first-of-type {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -206,7 +206,7 @@ export default {
     min-width: 380px;
     img {
       width: 100%;
-      &:first-child {
+      &:first-of-type {
         margin-bottom: 5vh;
       }
     }
@@ -293,7 +293,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     > div {
-      &:last-child {
+      &:last-of-type {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -303,7 +303,7 @@ export default {
           text-align: center;
           img {
             width: 40%;
-            &:nth-child(1) {
+            &:nth-of-type(1) {
               margin-right: 30px;
             }
           }
@@ -329,7 +329,7 @@ export default {
     display: flex;
     img {
       width: 50%;
-      &:first-child {
+      &:first-of-type {
         margin-right: 20px;
       }
     }

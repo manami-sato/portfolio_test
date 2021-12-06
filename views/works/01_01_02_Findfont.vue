@@ -1,15 +1,15 @@
 <template lang="pug">
 	main
-	  DetailedExplanation(value="1")
+	  Data(value="1")
 </template>
 
 <script>
-import DetailedExplanation from "@/components/DetailedExplanation.vue";
+import Data from "@/components/Data.vue";
 export default {
   name: "Findfont",
   el: "main",
   components: {
-    DetailedExplanation,
+    Data,
   },
 };
 </script>
