@@ -26,13 +26,11 @@
           h3.data__detail--appeal--ttl 問題定義／企画のきっかけ
           p.data__detail--appeal--txt {{chance}}
         section.data__detail--appeal
-          h3.data__detail--appeal--ttl フロントの立場で問題解決にどうやって関与してきたか
-        section.data__detail--appeal
           h3.data__detail--appeal--ttl それを叶えるためにプログラム上頑張ったこと
           p.data__detail--appeal--txt {{careful}}
         section.data__detail--appeal
-          h3.data__detail--appeal--ttl 技術目標（それを叶えるためにプログラム上意識したこと）
-          p.data__detail--appeal--txt {{impression}}
+          h3.data__detail--appeal--ttl 今回の技術目標
+          p.data__detail--appeal--txt {{goal}}
     nav.data__nav
       div.data__nav--logo
         img(:src="dataLogo.img")
@@ -51,7 +49,7 @@ export default {
       bColor: "",
       chance: "",
       careful: "",
-      impression: "",
+      goal: "",
       logo: "",
       title: "",
     };
@@ -97,7 +95,7 @@ export default {
         this.bColor = this.data.design.color[0].clr;
         this.chance = this.data.products.chance;
         this.careful = this.data.products.careful;
-        this.impression = this.data.products.impression;
+        this.goal = this.data.products.goal;
         document.title = this.data.title + `｜佐藤真奈実's Portfolio`;
       });
   },

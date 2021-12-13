@@ -112,7 +112,7 @@ import WorksHead from "@/components/WorksHead.vue";
 import Foot from "@/components/Foot.vue";
 export default {
   name: "Graphic",
-  el: "main",
+  // el: "main",
   components: {
     WorksHead,
     Foot,

@@ -24,7 +24,7 @@
 						svg(version="1.1",xmlns="http://www.w3.org/2000/svg",xmlns:xlink="http://www.w3.org/1999/xlink",x="0px",y="0px",viewBox="0 0 24 24",style="enable-background:new 0 0 24 24;",xml:space="preserve")
 							path(d="M16,22c1.1,0,2-0.9,2-2V8c0-3.3-2.7-6-6-6S6,4.7,6,8v12c0,1.1,0.9,2,2,2H16z M20,20c0,2.2-1.8,4-4,4H8c-2.2,0-4-1.8-4-4V8c0-4.4,3.6-8,8-8s8,3.6,8,8V20z M13,19c0,0.6-0.4,1-1,1s-1-0.4-1-1v-4c0-0.6,0.4-1,1-1s1,0.4,1,1V19z")
 					div scroll
-		//- p やりたいこと、やってることなど、アピールの補足
+		p.index__slogan {{slogan}}
 		section.index__profile#about
 			div.index__profile--icon
 				//- img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_icon.jpg",alt="アイコン")
@@ -78,9 +78,9 @@
 				router-link(:to="`/ecc/msatou/portfolio/${rcmPath[i]}`")
 					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
 					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
-		router-link(to="/ecc/msatou/portfolio/web" ,v-on:mouseover="worksBnr",v-on:mouseleave="worksBnr").index__work
+		router-link(to="/ecc/msatou/portfolio/web",v-on:mouseover="worksBnr",v-on:mouseleave="worksBnr").index__work
 			span {{worksBnrTxt[worksBnrNum]}}
-		div.index__slogan やりたいこと、やってることなど、復唱
+		div.index__slogan {{slogan}}
 		Foot#contact
 </template>
 <script>
@@ -114,10 +114,12 @@ export default {
       rcmText: "",
       rcmLang: "",
       rcmURL: "",
+      slogan: "チームの軸を支えられるフロントエンドエンジニアになるために。",
     };
   },
   methods: {
     worksBnr() {
+      console.log(this.worksBnrFlag);
       this.worksBnrFlag = !this.worksBnrFlag;
       if (this.worksBnrFlag) {
         this.worksBnrNum = 0;

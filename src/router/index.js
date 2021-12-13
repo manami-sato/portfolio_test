@@ -21,7 +21,7 @@ Vue.use(VueHead);
 
 const routes = [
   {
-    path: "/ecc/msatou/portfolio/",
+    path: "/",
     name: "Home",
     component: Home,
   },
