@@ -40,9 +40,9 @@
 					|小学生の頃に簡単なHTMLやCSSに触れ、コーディングの楽しさを<br>
 					|感じていたことからこの分野を目指しました。<br>
 					|記法に沿った・SEOを意識したコードを書けるように勉強中です。
-				p
-					|skills:HTML5、CSS3、JavaScript、Illustrator、Photoshop<br>
-					|studying:Vue.js
+				ul
+					li(v-for="(lang, i) in langData")
+						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
 				p
 					|趣味：カメラです！桜と紅葉の時季には必ず撮影に行きます！
 			div.index__profile--link
@@ -62,10 +62,10 @@
 					p.index__rcm--catchphrase  {{rcmCatchphrase}}
 				p.index__rcm--txt {{rcmText}}
 				div.index__rcm--lang
-					span 使用言語：
-					span(v-for="item in rcmLang",:key="item") {{item}}
+					div(v-for="item in rcmLang",:key="item")
+						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
 				div.index__rcm--link
-					a(:href="`https://manami-sato.github.io/${rcmURL}/`")
+					a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="web")
 						span Web site
 					a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="github")
 						span GitHub
@@ -88,7 +88,6 @@ import Foot from "@/components/Foot.vue";
 
 export default {
   name: "Home",
-  // el: "main",
   components: {
     Foot,
   },
@@ -102,6 +101,7 @@ export default {
   data() {
     return {
       res: [],
+      langData: ["Vue", "Pug", "Sass", "HTML5", "CSS3", "JavaScript"],
       rcmData: 0,
       rcmPath: ["fribo", "userella", "jishatecho", "gifcle", "minicomi"],
       rcmAlt: ["Fribo", "userella", "寺社手帖", "Gifcle", "ミニコミ！"],
@@ -129,12 +129,12 @@ export default {
     },
   },
   mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/php/web.php")
+    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
-        this.res = json;
+        this.res = json.web;
         this.rcmData = this.res.length - 1;
         this.rcmSort = this.res[this.rcmData].sort;
         this.rcmTitle = this.res[this.rcmData].title;
@@ -149,64 +149,6 @@ export default {
 
 <style lang="scss">
 @import "@/assets/scss/common.scss";
-/* ------------------------------
-navここから
------------------------------- */
-.index__nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100vw;
-  height: 80px;
-  // background: rgba($color: $white, $alpha: 0.8);
-  padding: 0 10%;
-  font-size: 2rem;
-  font-weight: bold;
-  font-family: $font;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  > * {
-    display: flex;
-    align-items: center;
-    height: inherit;
-  }
-  &--logo {
-    width: 200px;
-    height: 80%;
-    &:hover {
-      opacity: 0.7;
-    }
-    a {
-      width: 100%;
-      height: 100%;
-      opacity: 1;
-      transition: 0.2s opacity;
-      img {
-        width: inherit;
-        height: inherit;
-        object-fit: contain;
-      }
-    }
-  }
-  &--link {
-    a {
-      display: inline-block;
-      color: $accentColor;
-      margin-left: 36px;
-      opacity: 1;
-      transition: 0.2s opacity;
-      &:hover {
-        color: $accentColor;
-        opacity: 0.5;
-      }
-    }
-  }
-}
-/* ------------------------------
-navここまで
------------------------------- */
 /* ------------------------------
 fvここから
 ------------------------------ */
@@ -302,6 +244,64 @@ fvここから
 fvここまで
 ------------------------------ */
 /* ------------------------------
+navここから
+------------------------------ */
+.index__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  // background: rgba($color: $white, $alpha: 0.8);
+  padding: 0 10%;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: $font;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  > * {
+    display: flex;
+    align-items: center;
+    height: inherit;
+  }
+  &--logo {
+    width: 200px;
+    height: 80%;
+    &:hover {
+      opacity: 0.7;
+    }
+    a {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      transition: 0.2s opacity;
+      img {
+        width: inherit;
+        height: inherit;
+        object-fit: contain;
+      }
+    }
+  }
+  &--link {
+    a {
+      display: inline-block;
+      color: $accentColor;
+      margin-left: 36px;
+      opacity: 1;
+      transition: 0.2s opacity;
+      &:hover {
+        color: $accentColor;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+/* ------------------------------
+navここまで
+------------------------------ */
+/* ------------------------------
 プロフィールここから
 ------------------------------ */
 .index__profile {
@@ -353,9 +353,23 @@ fvここまで
     p {
       line-height: 24px;
       margin-top: 16px;
-      &:nth-of-type(2) {
+      &:nth-of-type(1) {
         font-weight: bold;
-        margin: 0;
+      }
+    }
+    ul {
+      display: flex;
+      margin-top: 16px;
+      li {
+        height: 32px;
+        margin-right: 8px;
+        img {
+          height: 100%;
+          object-fit: contain;
+        }
+        &:last-of-type {
+          margin: 0;
+        }
       }
     }
   }

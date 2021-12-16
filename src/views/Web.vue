@@ -4,7 +4,7 @@
 		div(v-if="getSortNum == 0").web
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",ref="item",:class=" i > 6 ? 'worksIndex1':'worksIndex2'",:style="{order:worksOrder - i}").web__contents.contentsActive
 				div.web__contents--img
-					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/${data.img}`")
+					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/web_0${data.year}_${data.img}.png`")
 				ul.web__contents--sort
 					li(v-for="item in data.sort",:key="item") {{item}}
 				h2.web__contents--appeal がんばったこと
@@ -13,19 +13,17 @@
 					p.web__contents--catchphrase {{data.catchphrase}}
 				p.web__contents--txt {{data.text}}
 				div.web__contents--lang
-					span 使用言語
-					span(v-for="item in data.lang",:key="item") {{item}}
+					div(v-for="item in data.lang",:key="item")
+						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
 				div.web__contents--link
-					a(:href="`https://manami-sato.github.io/${data.URL}/`",target="detail")
-						span Web site
-					a(:href="`https://github.com/manami-sato/${data.URL}/`",target="github")
-						span GitHub
-					router-link(:to="`/ecc/msatou/portfolio/${data.URL}`")
+					a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
+						span {{data.link[i].name}}
+					router-link(:to="`/ecc/msatou/portfolio/${data.img}`")
 						span more
 		div.test
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",v-if="getSortNum == data.year",class="contentsActive",ref="item",:style="{order:worksOrder - i}").web__contents
 				div.web__contents--img
-					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/${data.img}`")
+					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/web_0${data.year}_${data.img}.png`")
 				div.test2
 					ul.web__contents--sort
 						li(v-for="item in data.sort",:key="item") {{item}}
@@ -36,14 +34,12 @@
 						p.web__contents--catchphrase {{data.catchphrase}}
 					p.web__contents--txt {{data.text}}
 					div.web__contents--lang
-						span 使用言語
-						span(v-for="item in data.lang",:key="item") {{item}}
+						div(v-for="item in data.lang",:key="item")
+							img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
 					div.web__contents--link
-						a(:href="`https://manami-sato.github.io/${data.URL}/`",target="detail")
-							span Web site
-						a(:href="`https://github.com/manami-sato/${data.URL}/`",target="github")
-							span GitHub
-						router-link(:to="`/ecc/msatou/portfolio/${data.URL}`")
+						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
+							span {{data.link[i].name}}
+						router-link(:to="`/ecc/msatou/portfolio/${data.img}`")
 							span more
 		div(v-if="getSortNum == 3")
 			p.graphic__none coming soon...
@@ -59,7 +55,6 @@ import WorksHead from "@/components/WorksHead.vue";
 import Foot from "@/components/Foot.vue";
 export default {
   name: "Web",
-  // el: "main",
   components: {
     WorksHead,
     Foot,
@@ -77,7 +72,6 @@ export default {
     return {
       res: [],
       getSortNum: 0,
-      // contentsDisplay: 0,
       selectedNumber: 0,
       old: 0,
       test: [0, 0],
@@ -103,12 +97,12 @@ export default {
   //   },
   // },
   mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/php/web.php")
+    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
-        this.res = json;
+        this.res = json.web;
         this.worksOrder = this.res.length;
         // console.log(this.worksOrder);
         // this.res = this.res[this.res.length - 1];

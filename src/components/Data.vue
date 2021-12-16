@@ -1,5 +1,5 @@
 <template lang="pug">
-  section(:style="{borderColor: bColor}").data
+  div(:style="{borderColor: color}").data
     div.data__description
       div.data__description--img
         img(:src="dataMockUp.img")
@@ -12,25 +12,21 @@
         div.data__description--lang
           span 使用言語
           span(v-for="item in data.lang",:key="item") {{item}}
-        div.data__description--link
-          a(:href="`https://manami-sato.github.io/${data.URL}/`")
-            span Web site
-          a(:href="`https://github.com/manami-sato/${data.URL}/`",target="github")
-            span GitHub
-          a(:href="`/graphic#${data.URL}/`")
-            span to Graphic
     section.data__detail
-      h2.data__detail--ttl がんばったこといろいろ
+      h2.data__detail--ttl {{data.headline}}
       div
         section.data__detail--appeal
           h3.data__detail--appeal--ttl 問題定義／企画のきっかけ
-          p.data__detail--appeal--txt {{chance}}
+          p.data__detail--appeal--txt {{data.chance}}
         section.data__detail--appeal
-          h3.data__detail--appeal--ttl それを叶えるためにプログラム上頑張ったこと
-          p.data__detail--appeal--txt {{careful}}
+          h3.data__detail--appeal--ttl フロントエンドにおける技術目標
+          p.data__detail--appeal--txt {{data.target}}
         section.data__detail--appeal
-          h3.data__detail--appeal--ttl 今回の技術目標
-          p.data__detail--appeal--txt {{goal}}
+          h3.data__detail--appeal--ttl 反省と次回に活かすこと
+          p.data__detail--appeal--txt {{data.introspection}}
+    div.data__link
+      a(v-for="(link,i) in data.link",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
+        span {{data.link[i].name}}
     nav.data__nav
       div.data__nav--logo
         img(:src="dataLogo.img")
@@ -40,16 +36,12 @@
 <script>
 export default {
   name: "Data",
-  // el: "section",
   props: ["value"],
   data() {
     return {
       res: [],
       data: "",
-      bColor: "",
-      chance: "",
-      careful: "",
-      goal: "",
+      color: "",
       logo: "",
       title: "",
     };
@@ -68,14 +60,14 @@ export default {
       return {
         img:
           this.data.img &&
-          `https://click.ecc.ac.jp/ecc/msatou/portfolio/img/${this.data.img}`,
+          `https://click.ecc.ac.jp/ecc/msatou/portfolio/img/web_0${this.data.year}_${this.data.img}.png`,
       };
     },
     dataLogo() {
       return {
         img:
           this.data.img &&
-          `https://click.ecc.ac.jp/ecc/msatou/portfolio/img/works_logo_${this.data.URL}.svg`,
+          `https://click.ecc.ac.jp/ecc/msatou/portfolio/img/works_logo_${this.data.img}.svg`,
       };
     },
   },
@@ -85,17 +77,14 @@ export default {
     },
   },
   mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/php/web.php")
+    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
-        this.res = json;
-        this.data = json[this.value];
-        this.bColor = this.data.design.color[0].clr;
-        this.chance = this.data.products.chance;
-        this.careful = this.data.products.careful;
-        this.goal = this.data.products.goal;
+        this.res = json.web;
+        this.data = this.res[this.value];
+        this.color = this.data.color;
         document.title = this.data.title + `｜佐藤真奈実's Portfolio`;
       });
   },
@@ -105,20 +94,16 @@ export default {
 <style lang="scss">
 @import "@/assets/scss/common.scss";
 .data {
-  display: flex;
-  justify-content: space-around;
   min-height: 100vh;
   border-style: solid;
   border-width: 24px;
-  padding: 56px 5%;
+  padding: 56px 10%;
   position: relative;
   &__description {
-    width: 40%;
-    min-width: 360px;
     flex-direction: column;
     @include worksPreset();
     &--img {
-      width: 80%;
+      width: 90%;
       height: 300px;
       img {
         width: 100%;
@@ -134,8 +119,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 50%;
-    min-width: 520px;
     &--ttl {
       color: $mainColor;
       font-size: 3.2rem;
@@ -154,6 +137,22 @@ export default {
       &--txt {
         line-height: 2.4rem;
       }
+    }
+  }
+  &__link {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    a {
+      width: 200px;
+      @include btn(
+        $bg: $accentColor,
+        $c: $white,
+        $b: 3px solid $accentColor,
+        $h: 48px
+      );
+      @include btnHoverAction($c: $accentColor);
     }
   }
   &__nav {
@@ -208,6 +207,48 @@ export default {
       }
       &::after {
         transform: rotateZ(-45deg);
+      }
+    }
+  }
+}
+@media screen and (min-width: 1000px) {
+  .data {
+    display: grid;
+    grid-template-columns: 40% 55%;
+    grid-template-rows: auto auto;
+    grid-gap: 0 5%;
+    &__description {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    &__detail {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    &__link {
+      grid-column: 1/3;
+      grid-row: 2;
+    }
+  }
+}
+@media screen and (max-width: 1000px) {
+  .data {
+    display: flex;
+    flex-direction: column;
+    &__description {
+      order: 1;
+    }
+    &__detail {
+      order: 3;
+    }
+    &__link {
+      order: 2;
+      a {
+        min-width: 104px;
+        margin: 8px 16px 8px 0;
+        &:last-of-type {
+          margin: 8px 16px 8px 0;
+        }
       }
     }
   }

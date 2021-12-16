@@ -17,7 +17,6 @@ import WorksHead from "@/components/WorksHead.vue";
 import Foot from "@/components/Foot.vue";
 export default {
   name: "Web",
-  // el: "main",
   components: {
     WorksHead,
     Foot,
@@ -37,12 +36,12 @@ export default {
     };
   },
   mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/php/practice.php")
+    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
-        this.res = json;
+        this.res = json.training;
       });
   },
 };

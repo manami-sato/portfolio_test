@@ -5,23 +5,23 @@ import Home from "../views/Home.vue";
 import Web from "../views/Web.vue";
 import Graphic from "../views/Graphic.vue";
 import Training from "../views/Training.vue";
-import Gifcle from "../views/works/02_01_06_Gifcle.vue";
-import Fribo from "../views/works/02_01_05_Fribo.vue";
-import Philosophia from "../views/works/02_01_04_Philosophia.vue";
-import minicomi from "../views/works/02_01_03_minicomi.vue";
-import Pf_ver1 from "../views/works/02_01_01_Pf_ver1.vue";
-import Pf_murata from "../views/works/02_01_02_Pf_murata.vue";
-import Koka from "../views/works/01_01_01_Koka.vue";
-import Findfont from "../views/works/01_01_02_Findfont.vue";
-import Jishatecho from "../views/works/01_02_01_Jishatecho.vue";
-import Userella from "../views/works/01_02_02_Userella.vue";
+import Koka from "../views/works/01_01_Koka.vue";
+import Findfont from "../views/works/01_02_Findfont.vue";
+import Jishatecho from "../views/works/01_03_Jishatecho.vue";
+import Pf_ver1 from "../views/works/01_04_Pf_ver1.vue";
+import Userella from "../views/works/01_05_Userella.vue";
+import minicomi from "../views/works/02_01_minicomi.vue";
+// import Pf_murata from "../views/works/02_01_02_Pf_murata.vue";
+import Philosophia from "../views/works/02_03_Philosophia.vue";
+import Fribo from "../views/works/02_04_Fribo.vue";
+import Gifcle from "../views/works/02_05_Gifcle.vue";
 
 Vue.use(VueRouter);
 Vue.use(VueHead);
 
 const routes = [
   {
-    path: "/",
+    path: "/ecc/msatou/portfolio/",
     name: "Home",
     component: Home,
   },
@@ -41,7 +41,7 @@ const routes = [
     component: Training,
   },
   {
-    path: "/ecc/msatou/portfolio/gifcle",
+    path: "/gifcle",
     name: "Gifcle",
     component: Gifcle,
   },
@@ -65,11 +65,11 @@ const routes = [
     name: "Pf_ver1",
     component: Pf_ver1,
   },
-  {
-    path: "/ecc/msatou/portfolio/pf_murata",
-    name: "Pf_murata",
-    component: Pf_murata,
-  },
+  // {
+  //   path: "/ecc/msatou/portfolio/pf_murata",
+  //   name: "Pf_murata",
+  //   component: Pf_murata,
+  // },
   {
     path: "/ecc/msatou/portfolio/koka",
     name: "Koka",
