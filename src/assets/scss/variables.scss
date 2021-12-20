@@ -15,7 +15,9 @@ $font: "Montserrat Alternates", sans-serif;
   $c: $baceColor,
   $b: 3px solid $mainColor,
   $fs: 1.6rem,
-  $h: 56px
+  $h: 56px,
+  $m1: 8px 16px 8px 0,
+  $m2: 8px 0
 ) {
   height: $h;
   display: flex;
@@ -27,7 +29,7 @@ $font: "Montserrat Alternates", sans-serif;
   font-weight: bold;
   font-size: $fs;
   font-family: $font;
-  margin: 8px 16px 8px 0;
+  margin: $m1;
   transform: skewX(340deg);
   overflow: hidden;
   position: relative;
@@ -39,7 +41,7 @@ $font: "Montserrat Alternates", sans-serif;
     padding: 0 12px;
   }
   &:last-of-type {
-    margin: 8px 0;
+    margin: $m2;
   }
 }
 @mixin btnHoverAction($bg: $white, $c: $mainColor) {
@@ -62,13 +64,23 @@ $font: "Montserrat Alternates", sans-serif;
     }
   }
 }
-@mixin throughTtl($ttl, $t, $r, $b, $l, $z: -1, $mbm: normal) {
+@mixin throughTtl(
+  $ttl,
+  $t,
+  $r,
+  $b,
+  $l,
+  $z: -1,
+  $mbm: normal,
+  $c: $baceColor,
+  $fs: 12rem
+) {
   position: relative;
   &::after {
     content: $ttl;
-    color: $baceColor;
+    color: $c;
     font-family: $font;
-    font-size: 12rem;
+    font-size: $fs;
     font-weight: 600;
     position: absolute;
     top: $t;
@@ -81,13 +93,17 @@ $font: "Montserrat Alternates", sans-serif;
   }
 }
 
-@mixin worksPreset($apMargin: 0 0 36px, $d1: flex) {
+@mixin worksPreset($d1: flex, $ai: center) {
   display: $d1;
   justify-content: space-around;
-  align-items: center;
+  align-items: $ai;
   &:first-of-type {
     margin: 0 auto;
   }
+  // &--wrap {
+  //   width: 50%;
+  //   min-width: 400px;
+  // }
   &--sort {
     display: flex;
     flex-wrap: wrap;
@@ -113,10 +129,10 @@ $font: "Montserrat Alternates", sans-serif;
       }
     }
   }
-  &--appeal {
+  &--headline {
     color: $mainColor;
-    font-size: 3.2rem;
-    margin: $apMargin;
+    font-size: 2.8rem;
+    margin: 0 0 16px;
   }
   &--info {
     display: flex;

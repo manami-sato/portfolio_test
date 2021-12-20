@@ -6,8 +6,6 @@
 					img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/logo.svg",alt="佐藤真奈実' Portfolio")
 			ul.index__nav--link
 				li
-					a(href="#top") top
-				li
 					a(href="#about") about
 				li
 					a(href="#works") works
@@ -15,7 +13,6 @@
 					a(href="#contact") contact
 		section.index__fv
 			div.index__fv--illust
-				//- img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_illust.png",alt="")
 			div
 				h1.index__fv--logo
 					img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/logo.svg",alt="佐藤真奈実' Portfolio")
@@ -27,7 +24,10 @@
 		p.index__slogan {{slogan}}
 		section.index__profile#about
 			div.index__profile--icon
-				//- img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_icon.jpg",alt="アイコン")
+				div
+					div
+						img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_about_icon.png",alt="アイコン")
+						img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_about_icon_on.png",alt="アイコン")
 			div.index__profile--txt
 				h2
 					|カメラとフロントエンドに<br>
@@ -37,16 +37,16 @@
 					|ECCコンピュータ専門学校 マルチメディア研究学科<br>
 					|Webデザインコース 2年（23卒）
 				p
-					|小学生の頃に簡単なHTMLやCSSに触れ、コーディングの楽しさを<br>
+					|小学生の頃にHTMLやCSSに触れ、コーディングの楽しさを<br>
 					|感じていたことからこの分野を目指しました。<br>
-					|記法に沿った・SEOを意識したコードを書けるように勉強中です。
+					|記法に沿い、編集のしやすいコードを書けるよう勉強中です。
 				ul
 					li(v-for="(lang, i) in langData")
-						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
+						img(:src="`${imgPath}lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
 				p
 					|趣味：カメラです！桜と紅葉の時季には必ず撮影に行きます！
 			div.index__profile--link
-				a(href="https://github.com/manami-sato",target="_blank")
+				a(href="https://github.com/manami-sato",target="page")
 					span GitHub
 				a(href="https://click.ecc.ac.jp/ecc/msatou/Philosophia/",target="_blank")
 					span photography's portfolio
@@ -54,31 +54,29 @@
 			div
 				ul.index__rcm--sort
 					li(v-for="item in rcmSort",:key="item") {{item}}
-				h2.index__rcm--appeal
-					|がんばったこといろいろ<br>
-					|2行になる程度
+				h2.index__rcm--headline {{rcmHeadline}}
 				div
 					h3.index__rcm--ttl {{rcmTitle}}
 					p.index__rcm--catchphrase  {{rcmCatchphrase}}
 				p.index__rcm--txt {{rcmText}}
 				div.index__rcm--lang
 					div(v-for="item in rcmLang",:key="item")
-						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
+						img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
 				div.index__rcm--link
-					a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="web")
+					a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="page")
 						span Web site
-					a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="github")
+					a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="page")
 						span GitHub
-					router-link(:to="`/ecc/msatou/portfolio/${rcmURL}/`")
+					router-link(:to="`/ecc/msatou/portfolio/web/${rcmData+1}/`")
 						span more
 			div.index__rcm--img
 				img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_rcm_mock.png",alt="Gifcle")
 		ul.index__logo
 			li(v-for="(ttl,i) in rcmPath")
-				router-link(:to="`/ecc/msatou/portfolio/${rcmPath[i]}`")
-					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
-					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
-		router-link(to="/ecc/msatou/portfolio/web",v-on:mouseover="worksBnr",v-on:mouseleave="worksBnr").index__work
+				router-link(:to="`/ecc/msatou/portfolio/web/${rcmId[i]}`")
+					img(:src="`${imgPath}index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
+					img(:src="`${imgPath}index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
+		router-link(:to="{name:'Web'}",@mouseover="worksBnrOver",@mouseleave="worksBnrLeave").index__work
 			span {{worksBnrTxt[worksBnrNum]}}
 		div.index__slogan {{slogan}}
 		Foot#contact
@@ -101,31 +99,30 @@ export default {
   data() {
     return {
       res: [],
-      langData: ["Vue", "Pug", "Sass", "HTML5", "CSS3", "JavaScript"],
+      langData: ["Pug", "Sass", "JavaScript", "Vue", "HTML5", "CSS3"],
       rcmData: 0,
       rcmPath: ["fribo", "userella", "jishatecho", "gifcle", "minicomi"],
       rcmAlt: ["Fribo", "userella", "寺社手帖", "Gifcle", "ミニコミ！"],
+      rcmId: [8, 5, 9, 3, 6],
       worksBnrTxt: ["作品をもっとご覧になりませんか？", "view more!"],
-      worksBnrFlag: true,
       worksBnrNum: 0,
       rcmSort: "",
       rcmTitle: "",
+      rcmHeadline: "",
       rcmCatchphrase: "",
       rcmText: "",
       rcmLang: "",
       rcmURL: "",
       slogan: "チームの軸を支えられるフロントエンドエンジニアになるために。",
+      imgPath: "https://click.ecc.ac.jp/ecc/msatou/portfolio/img/",
     };
   },
   methods: {
-    worksBnr() {
-      console.log(this.worksBnrFlag);
-      this.worksBnrFlag = !this.worksBnrFlag;
-      if (this.worksBnrFlag) {
-        this.worksBnrNum = 0;
-      } else {
-        this.worksBnrNum = 1;
-      }
+    worksBnrOver() {
+      this.worksBnrNum = 1;
+    },
+    worksBnrLeave() {
+      this.worksBnrNum = 0;
     },
   },
   mounted() {
@@ -138,6 +135,7 @@ export default {
         this.rcmData = this.res.length - 1;
         this.rcmSort = this.res[this.rcmData].sort;
         this.rcmTitle = this.res[this.rcmData].title;
+        this.rcmHeadline = this.res[this.rcmData].headline;
         this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
         this.rcmText = this.res[this.rcmData].text;
         this.rcmLang = this.res[this.rcmData].lang;
@@ -154,8 +152,6 @@ fvここから
 ------------------------------ */
 .index__fv {
   display: flex;
-  width: 80vw;
-  min-height: 80vh;
   background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_illust.png")
     no-repeat;
   background-size: contain;
@@ -171,7 +167,6 @@ fvここから
       justify-content: center;
       align-items: flex-end;
       width: 60%;
-      // padding: 8% 0;
     }
   }
   &--logo {
@@ -302,43 +297,61 @@ navここから
 navここまで
 ------------------------------ */
 /* ------------------------------
+sloganここから
+------------------------------ */
+.index__slogan {
+  color: $mainColor;
+  font-size: 2.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+/* ------------------------------
+sloganここまで
+------------------------------ */
+/* ------------------------------
 プロフィールここから
 ------------------------------ */
 .index__profile {
-  width: 80%;
-  max-width: 1200px;
-  min-width: 400px;
-  display: grid;
-  grid-template-columns: minmax(40%, 440px) 55%;
-  grid-template-rows: auto auto;
-  column-gap: 5%;
-  row-gap: 48px;
   margin: 0 auto;
-  padding: 104px 0 0 4%;
-  @include throughTtl("</about>", auto, 0, 5%, auto);
   &--icon {
-    grid-column: 1;
-    grid-row: 1;
-    width: 360px;
-    height: 360px;
-    box-shadow: 8px 8px 0 $mainColor;
-    margin: 0 auto;
-    background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_about_icon.png");
-    background-size: cover;
-    background-position: center, center;
-    transition: 0.2s background;
-    img {
-      width: 100%;
-    }
-    &:hover {
-      background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_about_icon_on.png");
-      background-size: cover;
-      background-position: center, center;
+    div {
+      margin: 0 auto;
+      div {
+        width: 100%;
+        padding-top: 100%;
+        box-shadow: 8px 8px 0 $mainColor;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          transition: 0.2s opacity;
+          &:first-of-type {
+            opacity: 1;
+          }
+          &:last-of-type {
+            opacity: 0;
+          }
+        }
+        &:hover {
+          img {
+            &:first-of-type {
+              opacity: 0;
+            }
+            &:last-of-type {
+              opacity: 1;
+            }
+          }
+        }
+      }
     }
   }
   &--txt {
-    grid-column: 2;
-    grid-row: 1/3;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -374,19 +387,15 @@ navここまで
     }
   }
   &--link {
-    grid-column: 1;
-    grid-row: 2;
     display: flex;
     justify-content: space-around;
     a {
       &:first-of-type {
         @include btn();
-        width: 40%;
         @include btnHoverAction();
       }
       &:last-of-type {
         @include btn($white, $mainColor);
-        width: 55%;
         @include btnHoverAction($mainColor, $baceColor);
       }
     }
@@ -399,18 +408,9 @@ navここまで
 おすすめの作品ここから
 ------------------------------ */
 .index__rcm {
-  flex-wrap: wrap;
-  width: 85vw;
-  max-width: 1200px;
   margin: 0 auto 104px;
-  @include worksPreset();
-  @include throughTtl("</recommend works>", 12%, auto, auto, -3%);
   padding-top: 144px;
-  > div:first-of-type {
-    width: 45%;
-  }
   &--img {
-    width: 50%;
     img {
       width: 100%;
     }
@@ -433,10 +433,7 @@ navここまで
   padding-bottom: 32px;
   li {
     width: 20%;
-    min-width: 180px;
-    height: 80px;
     background-position: center center;
-    margin: 24px 5%;
     transition: 0.2s background-image;
     a {
       display: flex;
@@ -464,7 +461,6 @@ navここまで
         }
       }
       &:hover {
-        // width: 110%;
         img {
           &:first-of-type {
             opacity: 0;
@@ -488,15 +484,11 @@ worksここから
   justify-content: flex-start;
   align-items: center;
   width: 100vw;
-  height: 352px;
-  background: $baceColor;
-  padding: 0 0 0 20%;
   font-weight: bold;
   font-size: 2.4rem;
   font-family: $font;
   overflow: hidden;
   transition: 0.2s color, 0.2s background;
-  @include throughTtl("</works>", auto, 10%, -8%, auto, auto, multiply);
   &:hover {
     background: $mainColor;
     color: $baceColor;
@@ -514,17 +506,214 @@ worksここから
 /* ------------------------------
 worksここまで
 ------------------------------ */
-/* ------------------------------
-sloganここから
------------------------------- */
-.index__slogan {
-  color: $mainColor;
-  font-size: 2.4rem;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 168px;
+@media screen and (min-width: 1001px) {
+  .index__fv {
+    width: 80vw;
+    min-height: 80vh;
+  }
+  .index__slogan {
+    margin-top: 104px;
+  }
+  .index__profile {
+    width: 80%;
+    max-width: 1200px;
+    min-width: 400px;
+    display: grid;
+    grid-template-columns: 40% 55%;
+    grid-template-rows: auto auto;
+    column-gap: 5%;
+    row-gap: 48px;
+    padding: 104px 0 0 4%;
+    @include throughTtl("</about>", auto, 0, 5%, auto);
+    &--icon {
+      div {
+        max-width: 360px;
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+    &--txt {
+      grid-column: 2;
+      grid-row: 1/3;
+    }
+    &--link {
+      grid-column: 1;
+      grid-row: 2;
+      a {
+        &:first-of-type {
+          width: 40%;
+        }
+        &:last-of-type {
+          width: 55%;
+        }
+      }
+    }
+  }
+  .index__rcm {
+    width: 85vw;
+    max-width: 1200px;
+    @include worksPreset();
+    @include throughTtl("</recommend works>", 12%, auto, auto, -3%);
+    > div:first-of-type {
+      width: 45%;
+    }
+    &--img {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .index__logo {
+    li {
+      min-width: 180px;
+      height: 80px;
+      margin: 24px 5%;
+    }
+  }
+  .index__work {
+    height: 360px;
+    background: $baceColor;
+    padding: 0 0 0 20%;
+    @include throughTtl("</works>", auto, 10%, -8%, auto, auto, multiply);
+  }
 }
-/* ------------------------------
-sloganここまで
------------------------------- */
+@media screen and (max-width: 1000px) {
+  .index__fv {
+    width: 80vw;
+    min-height: 70vh;
+  }
+  .index__slogan {
+    margin: 64px auto;
+  }
+  .index__profile {
+    width: 80%;
+    @include throughTtl("</about>", auto, 0, 5%, auto, $fs: 8rem);
+    &--txt {
+      width: 80%;
+      margin: 64px auto 24px;
+    }
+    &--icon {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+    &--link {
+      width: 80%;
+      margin: 0 auto;
+      a {
+        width: 48%;
+      }
+    }
+  }
+  .index__rcm {
+    width: 80vw;
+    @include worksPreset($ai: flex-end);
+    @include throughTtl("</recommend works>", 12%, auto, auto, -3%, $fs: 8rem);
+    flex-direction: column;
+    > div:first-of-type {
+      order: 2;
+    }
+    &--img {
+      width: 60%;
+      min-width: 400px;
+      margin-right: 8%;
+      order: 1;
+    }
+  }
+  .index__logo {
+    li {
+      min-width: 120px;
+      height: 80px;
+      margin: 0 3%;
+    }
+  }
+  .index__work {
+    height: 256px;
+    background: $baceColor;
+    padding: 0 0 0 20%;
+    @include throughTtl(
+      "</works>",
+      auto,
+      10%,
+      -8%,
+      auto,
+      auto,
+      multiply,
+      $fs: 8rem
+    );
+  }
+}
+@media screen and (max-width: 650px) {
+  .index__fv {
+    width: 100vw;
+    height: 60vh;
+    background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_illust.png")
+      no-repeat;
+    background-size: contain;
+    background-position: 0 80px;
+  }
+  .index__slogan {
+    margin: 80px auto 0;
+  }
+  .index__profile {
+    width: 90%;
+    margin-top: 104px;
+    @include throughTtl("</about>", auto, 0, 5%, auto, $fs: 6rem);
+    &--icon {
+      width: 60%;
+      // max-width: 360px;
+      margin: 0 auto;
+    }
+    &--txt {
+      margin: 64px auto;
+    }
+    &--link {
+      margin: 0 auto;
+      width: 100%;
+      a {
+        width: 48%;
+      }
+    }
+  }
+  .index__rcm {
+    flex-direction: column;
+    @include worksPreset();
+    @include throughTtl("</recommend works>", 12%, auto, auto, -3%, $fs: 6rem);
+    width: 90%;
+    &--img {
+      width: 90%;
+    }
+  }
+  .index__logo {
+    li {
+      min-width: 104px;
+      height: 64px;
+      margin: 0 3%;
+    }
+  }
+  .index__work {
+    height: 200px;
+    background: $mainColor;
+    color: $baceColor;
+    padding: 0 4%;
+    @include throughTtl(
+      "</works>",
+      auto,
+      10%,
+      -8%,
+      auto,
+      auto,
+      multiply,
+      $c: $mainColor,
+      $fs: 6rem
+    );
+    &:hover {
+      background: $baceColor;
+      color: $mainColor;
+      &::after {
+        color: $mainColor;
+      }
+    }
+  }
+}
 </style>

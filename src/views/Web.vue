@@ -4,42 +4,42 @@
 		div(v-if="getSortNum == 0").web
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",ref="item",:class=" i > 6 ? 'worksIndex1':'worksIndex2'",:style="{order:worksOrder - i}").web__contents.contentsActive
 				div.web__contents--img
-					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/web_0${data.year}_${data.img}.png`")
-				ul.web__contents--sort
-					li(v-for="item in data.sort",:key="item") {{item}}
-				h2.web__contents--appeal がんばったこと
-				div.web__contents--info
-					h3.web__contents--ttl {{data.title}}
-					p.web__contents--catchphrase {{data.catchphrase}}
-				p.web__contents--txt {{data.text}}
-				div.web__contents--lang
-					div(v-for="item in data.lang",:key="item")
-						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
-				div.web__contents--link
-					a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
-						span {{data.link[i].name}}
-					router-link(:to="`/ecc/msatou/portfolio/${data.img}`")
-						span more
-		div.test
-			section(v-for="(data,i) in res",:key="i",:data-year="data.year",v-if="getSortNum == data.year",class="contentsActive",ref="item",:style="{order:worksOrder - i}").web__contents
-				div.web__contents--img
-					img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/web_0${data.year}_${data.img}.png`")
-				div.test2
+					img(:src="`${imgPath}web_0${data.year}_${data.img}.png`")
+				div
 					ul.web__contents--sort
 						li(v-for="item in data.sort",:key="item") {{item}}
-					h2.web__contents--appeal
-						|がんばったこと
+					h2.web__contents--headline {{data.headline}}
 					div.web__contents--info
 						h3.web__contents--ttl {{data.title}}
 						p.web__contents--catchphrase {{data.catchphrase}}
 					p.web__contents--txt {{data.text}}
 					div.web__contents--lang
 						div(v-for="item in data.lang",:key="item")
-							img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
+							img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
 					div.web__contents--link
 						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
 							span {{data.link[i].name}}
-						router-link(:to="`/ecc/msatou/portfolio/${data.img}`")
+						router-link(:to="`/ecc/msatou/portfolio/web/${i+1}`")
+							span more
+		div.web
+			section(v-for="(data,i) in res",:key="i",:data-year="data.year",v-if="getSortNum == data.year",class="contentsActive",ref="item",:style="{order:worksOrder - i}").web__contents
+				div.web__contents--img
+					img(:src="`${imgPath}web_0${data.year}_${data.img}.png`")
+				div.web__contents--wrap
+					ul.web__contents--sort
+						li(v-for="item in data.sort",:key="item") {{item}}
+					h2.web__contents--headline {{data.headline}}
+					div.web__contents--info
+						h3.web__contents--ttl {{data.title}}
+						p.web__contents--catchphrase {{data.catchphrase}}
+					p.web__contents--txt {{data.text}}
+					div.web__contents--lang
+						div(v-for="item in data.lang",:key="item")
+							img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
+					div.web__contents--link
+						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
+							span {{data.link[i].name}}
+						router-link(:to="`/ecc/msatou/portfolio/web/${i+1}`")
 							span more
 		div(v-if="getSortNum == 3")
 			p.graphic__none coming soon...
@@ -78,13 +78,12 @@ export default {
       data: [],
       num: 0,
       worksOrder: 0,
+      imgPath: "https://click.ecc.ac.jp/ecc/msatou/portfolio/img/",
     };
   },
   methods: {
     circleAction(i) {
-      // console.log(i);
       this.selectedNumber = i;
-      // console.log(this.selectedNumber);
     },
     // newTab(i) {
     //   open(`https://click.ecc.ac.jp/ecc/msatou/portfolio/${this.res[i].URL}`);
@@ -104,8 +103,6 @@ export default {
       .then((json) => {
         this.res = json.web;
         this.worksOrder = this.res.length;
-        // console.log(this.worksOrder);
-        // this.res = this.res[this.res.length - 1];
       });
   },
   // updated() {
@@ -151,16 +148,16 @@ export default {
 .web {
   display: flex;
   justify-content: space-around;
-  width: 85vw;
+  width: 90vw;
   max-width: 1200px;
   flex-wrap: wrap;
   margin: 0 auto;
   &__contents {
     flex-wrap: wrap;
-    width: 85vw;
-    max-width: 1200px;
+    // width: 85vw;
+    // max-width: 1200px;
     margin: 0 auto 80px;
-    @include worksPreset(16px 0 12px, flex);
+    @include worksPreset(flex);
     @include contentsNone();
     opacity: 0.5;
     transition: 0.2s opacity;
@@ -210,82 +207,120 @@ export default {
 .circleActive {
   background: $mainColor;
 }
-.test {
-  display: flex;
-  flex-direction: column;
-}
-.test2 {
-  width: 50%;
-  min-width: 400px;
-}
 .worksIndex1 {
-  width: 45%;
-  min-width: 300px;
   margin-bottom: 80px;
-  @include worksPreset(16px 0 24px, block);
-  .web__contents--img {
-    width: 100%;
-    height: 400px;
-    padding: 0 0 32px 0;
-  }
 }
 .worksIndex2 {
   display: block;
   width: 28%;
   min-width: 304px;
   margin-bottom: 80px;
-  .web__contents--img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-width: auto;
-    height: 256px;
-    padding-bottom: 16px;
-    img {
+  .web__contents {
+    &--img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-  .web__contents--info {
-    display: flex;
-    flex-direction: column;
-    h3 {
-      order: 2;
-    }
-    p {
-      order: 1;
-    }
-  }
-  .web__contents--appeal {
-    display: none;
-  }
-  .web__contents--txt {
-    min-height: 88px;
-  }
-  .web__contents--link {
-    display: grid;
-    grid-template-columns: 48% 48%;
-    grid-template-rows: auto auto;
-    grid-gap: 8px 4%;
-    width: 90%;
-    margin: 0 auto;
-    a {
-      width: 100%;
-      &:nth-of-type(1) {
-        grid-column: 1;
-        grid-row: 1;
-      }
-      &:nth-of-type(2) {
-        grid-column: 2;
-        grid-row: 1;
-      }
-      &:nth-of-type(3) {
+      min-width: auto;
+      height: 256px;
+      padding-bottom: 16px;
+      img {
         width: 100%;
-        grid-column: 1/3;
-        grid-row: 2;
+        height: 100%;
+        object-fit: contain;
       }
+    }
+    &--info {
+      display: flex;
+      flex-direction: column;
+      h3 {
+        order: 2;
+      }
+      p {
+        order: 1;
+      }
+    }
+    &--txt {
+      min-height: 88px;
+    }
+    &--link {
+      display: grid;
+      grid-template-columns: 48% 48%;
+      grid-template-rows: auto auto;
+      grid-gap: 8px 4%;
+      width: 90%;
+      margin: 0 auto;
+      a {
+        width: 100%;
+        &:nth-of-type(1) {
+          grid-column: 1;
+          grid-row: 1;
+        }
+        &:nth-of-type(2) {
+          grid-column: 2;
+          grid-row: 1;
+        }
+        &:nth-of-type(3) {
+          width: 100%;
+          grid-column: 1/3;
+          grid-row: 2;
+        }
+      }
+    }
+    &--catchphrase {
+      display: none;
+    }
+    &--headline {
+      display: none;
+    }
+  }
+}
+@media screen and (min-width: 1101px) {
+  .web__contents {
+    &--wrap {
+      width: 50%;
+      min-width: 400px;
+    }
+  }
+  .worksIndex1 {
+    width: 45%;
+    min-width: 300px;
+    @include worksPreset(block);
+    .web__contents--img {
+      width: 100%;
+      height: 400px;
+      padding: 0 0 32px 0;
+    }
+  }
+}
+@media screen and (max-width: 1100px) {
+  .web__contents {
+    &--wrap {
+      width: 70%;
+    }
+  }
+  .worksIndex1 {
+    .web__contents--img {
+      + div {
+        width: 50%;
+        min-width: 400px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 760px) {
+  .web__contents {
+    &--img {
+      width: 80%;
+      max-width: 400px;
+      min-width: auto;
+      height: 296px;
+    }
+    &--wrap {
+      width: 70%;
+    }
+    &--info {
+      flex-direction: column;
     }
   }
 }

@@ -1,11 +1,11 @@
 <template lang="pug">
 	header.head
 		div.head__link
-			router-link(to="/ecc/msatou/portfolio/web",:class="value == page[0] ? 'head__link--on':'head__link--off'") web site
-			router-link(to="/ecc/msatou/portfolio/graphic",:class="value == page[1] ? 'head__link--on':'head__link--off'") graphic
-			router-link(to="/ecc/msatou/portfolio/training",:class="value == page[2] ? 'head__link--on':'head__link--off'") training
+			router-link(:to="{name:'Web'}",:class="value == page[0] ? 'head__link--on':'head__link--off'") web site
+			router-link(:to="{name:'Graphic'}",:class="value == page[1] ? 'head__link--on':'head__link--off'") graphic
+			router-link(:to="{name:'Practice'}",:class="value == page[2] ? 'head__link--on':'head__link--off'") practice
 		ul.head__sort
-			li(v-for="(item,index) in sortTtl.length",:key="index",v-on:click="sortAction(index)",v-bind:class="{sortActive:sortFlag[index]}").head__sort--item {{sortTtl[index]}}
+			li(v-for="(item,index) in sortTtl.length",:key="index",@click="sortAction(index)",:class="{sortActive:sortFlag[index]}").head__sort--item {{sortTtl[index]}}
 </template>
 
 <script>
@@ -14,10 +14,10 @@ export default {
   props: ["value"],
   data() {
     return {
+      page: ["web", "gra", "tra"],
       sortTtl: ["全て", "1年", "2年", "3年"],
       sortFlag: [true, false, false, false],
       sortIndex: 0,
-      page: ["web", "gra", "tra"],
     };
   },
   methods: {
@@ -29,7 +29,7 @@ export default {
         }
       }
       this.sortFlag[index] = !this.sortFlag[index];
-      console.log(index, this.sortFlag[index], this.sortFlag);
+      console.log(index, this.sortFlag[this.sortIndex], this.sortFlag);
       this.$emit("increment", this.sortIndex);
     },
   },
@@ -87,7 +87,6 @@ export default {
     }
   }
   &__sort {
-    display: flex;
     &--item {
       display: flex;
       justify-content: center;
@@ -115,5 +114,19 @@ export default {
 .sortActive {
   background: $baceColor;
   color: $mainColor;
+}
+@media screen and (min-width: 951px) {
+  .head {
+    &__sort {
+      display: flex;
+    }
+  }
+}
+@media screen and (max-width: 950px) {
+  .head {
+    &__sort {
+      z-index: 3;
+    }
+  }
 }
 </style>
