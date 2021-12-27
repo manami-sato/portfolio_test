@@ -80,6 +80,9 @@
 			span {{worksBnrTxt[worksBnrNum]}}
 		div.index__slogan {{slogan}}
 		Foot#contact
+		div.index__back
+			svg(xmlns="http://www.w3.org/2000/svg",viewBox="0 0 80.19 100.57")
+				path(d="M40.1,100.57a7,7,0,0,1-7-7V23.9L12,45.05a7,7,0,0,1-9.9-9.9L35.11,2.09a7,7,0,0,1,6-2h0l.45.08A7,7,0,0,1,45,2h0l33.09,33.1a7,7,0,0,1-9.9,9.9L47.1,23.9V93.57A7,7,0,0,1,40.1,100.57Z")
 </template>
 <script>
 import Foot from "@/components/Foot.vue";
@@ -506,9 +509,44 @@ worksここから
 /* ------------------------------
 worksここまで
 ------------------------------ */
+/* ------------------------------
+backここから
+------------------------------ */
+.index__back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  background: $mainColor;
+  transition: 0.2s background;
+  position: absolute;
+  right: 80px;
+  bottom: 80px;
+  mix-blend-mode: multiply;
+  svg {
+    width: 32px;
+    transform: 0;
+    transition: 0.2s transform, 0.2s background;
+  }
+  path {
+    fill: $baceColor;
+  }
+  &:hover {
+    background: $accentColor;
+    svg {
+      background: $mainColor;
+      transform: transrateY(2px);
+    }
+  }
+}
+/* ------------------------------
+backここまで
+------------------------------ */
 @media screen and (min-width: 1001px) {
   .index__fv {
     width: 80vw;
+    max-width: 1200px;
     min-height: 80vh;
   }
   .index__slogan {
@@ -608,7 +646,7 @@ worksここまで
   .index__rcm {
     width: 80vw;
     @include worksPreset($ai: flex-end);
-    @include throughTtl("</recommend works>", 12%, auto, auto, -3%, $fs: 8rem);
+    @include throughTtl("</recommend works>", 20%, auto, auto, -3%, $fs: 8rem);
     flex-direction: column;
     > div:first-of-type {
       order: 2;

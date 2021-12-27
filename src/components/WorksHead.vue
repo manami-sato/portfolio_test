@@ -16,7 +16,12 @@ export default {
     return {
       page: ["web", "gra", "tra"],
       sortTtl: ["全て", "1年", "2年", "3年"],
-      sortFlag: [true, false, false, false],
+      // sortFlag: [true, false, false, false],
+      sortFlag0: true,
+      sortFlag1: false,
+      sortFlag2: false,
+      sortFlag3: false,
+      sortFlag: [],
       sortIndex: 0,
     };
   },
@@ -28,10 +33,18 @@ export default {
           this.sortFlag[i] = !this.sortFlag[i];
         }
       }
-      this.sortFlag[index] = !this.sortFlag[index];
-      console.log(index, this.sortFlag[this.sortIndex], this.sortFlag);
+      console.log(this.sortFlag);
+      // this.sortFlag[index] = !this.sortFlag[index];
+
       this.$emit("increment", this.sortIndex);
     },
+  },
+  mounted() {
+    this.sortFlag.push(this.sortFlag0);
+    this.sortFlag.push(this.sortFlag1);
+    this.sortFlag.push(this.sortFlag2);
+    this.sortFlag.push(this.sortFlag3);
+    console.log(this.sortFlag);
   },
 };
 </script>

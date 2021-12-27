@@ -10,29 +10,32 @@ import WebData from "../views/WebData.vue";
 Vue.use(VueRouter);
 Vue.use(VueHead);
 
+const route = "/";
+// /ecc/msatou/portfolio/
+
 const routes = [
   {
-    path: "/ecc/msatou/portfolio/",
+    path: `${route}`,
     name: "Home",
     component: Home,
   },
   {
-    path: "/ecc/msatou/portfolio/web",
+    path: `${route}` + `web`,
     name: "Web",
     component: Web,
   },
   {
-    path: "/ecc/msatou/portfolio/graphic",
+    path: `${route}` + `graphic`,
     name: "Graphic",
     component: Graphic,
   },
   {
-    path: "/ecc/msatou/portfolio/practice",
+    path: `${route}` + `practice`,
     name: "Practice",
     component: Practice,
   },
   {
-    path: "/ecc/msatou/portfolio/web/:id",
+    path: `${route}` + `web/:id`,
     name: "WebData",
     component: WebData,
     props: (route) => ({ id: Number(route.params.id) }),
