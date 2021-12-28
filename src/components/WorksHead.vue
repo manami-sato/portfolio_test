@@ -16,12 +16,12 @@ export default {
     return {
       page: ["web", "gra", "tra"],
       sortTtl: ["全て", "1年", "2年", "3年"],
-      // sortFlag: [true, false, false, false],
-      sortFlag0: true,
-      sortFlag1: false,
-      sortFlag2: false,
-      sortFlag3: false,
-      sortFlag: [],
+      sortFlag: [true, false, false, false],
+      // sortFlag0: true,
+      // sortFlag1: false,
+      // sortFlag2: false,
+      // sortFlag3: false,
+      // sortFlag: [],
       sortIndex: 0,
     };
   },
