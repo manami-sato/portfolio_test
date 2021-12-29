@@ -5,7 +5,11 @@
 			router-link(:to="{name:'Graphic'}",:class="value == page[1] ? 'head__link--on':'head__link--off'") graphic
 			router-link(:to="{name:'Practice'}",:class="value == page[2] ? 'head__link--on':'head__link--off'") practice
 		ul.head__sort
-			li(v-for="(item,index) in sortTtl.length",:key="index",@click="sortAction(index)",:class="{sortActive:sortFlag[index]}").head__sort--item {{sortTtl[index]}}
+			li(@click="sortAction0",:class="{sortActive:sortFlag0}").head__sort--item 全て
+			li(@click="sortAction1",:class="{sortActive:sortFlag1}").head__sort--item 1年
+			li(@click="sortAction2",:class="{sortActive:sortFlag2}").head__sort--item 2年
+			li(@click="sortAction3",:class="{sortActive:sortFlag3}").head__sort--item 3年
+			//- li(v-for="(item,index) in sortTtl.length",:key="index",@click="sortAction(index)",:class="{sortActive:sortFlag[index]}").head__sort--item {sortTtl[index]}}
 </template>
 
 <script>
@@ -15,36 +19,54 @@ export default {
   data() {
     return {
       page: ["web", "gra", "tra"],
-      sortTtl: ["全て", "1年", "2年", "3年"],
-      sortFlag: [true, false, false, false],
-      // sortFlag0: true,
-      // sortFlag1: false,
-      // sortFlag2: false,
-      // sortFlag3: false,
-      // sortFlag: [],
+      // sortTtl: ["全て", "1年", "2年", "3年"],
+      // sortFlag: [true, false, false, false],
       sortIndex: 0,
+      sortFlag0: true,
+      sortFlag1: false,
+      sortFlag2: false,
+      sortFlag3: false,
     };
   },
   methods: {
-    sortAction(index) {
-      this.sortIndex = index;
-      for (let i = 0; i < this.sortTtl.length; i++) {
-        if (this.sortFlag[i]) {
-          this.sortFlag[i] = !this.sortFlag[i];
-        }
-      }
-      console.log(this.sortFlag);
-      // this.sortFlag[index] = !this.sortFlag[index];
-
-      this.$emit("increment", this.sortIndex);
+    // sortAction(index) {
+    //   this.sortIndex = index;
+    //   for (let i = 0; i < this.sortFlag.length; i++) {
+    //     if (this.sortFlag[i]) {
+    //       this.sortFlag[i] = !this.sortFlag[i];
+    //     }
+    //   }
+    //   this.sortFlag[index] = !this.sortFlag[index];
+    //   this.$emit("increment", this.sortIndex);
+    // },
+    sortAction0() {
+      this.sortFlag0 = true;
+      this.sortFlag1 = false;
+      this.sortFlag2 = false;
+      this.sortFlag3 = false;
+      this.$emit("increment", 0);
     },
-  },
-  mounted() {
-    this.sortFlag.push(this.sortFlag0);
-    this.sortFlag.push(this.sortFlag1);
-    this.sortFlag.push(this.sortFlag2);
-    this.sortFlag.push(this.sortFlag3);
-    console.log(this.sortFlag);
+    sortAction1() {
+      this.sortFlag0 = false;
+      this.sortFlag1 = true;
+      this.sortFlag2 = false;
+      this.sortFlag3 = false;
+      this.$emit("increment", 1);
+    },
+    sortAction2() {
+      this.sortFlag0 = false;
+      this.sortFlag1 = false;
+      this.sortFlag2 = true;
+      this.sortFlag3 = false;
+      this.$emit("increment", 2);
+    },
+    sortAction3() {
+      this.sortFlag0 = false;
+      this.sortFlag1 = false;
+      this.sortFlag2 = false;
+      this.sortFlag3 = true;
+      this.$emit("increment", 3);
+    },
   },
 };
 </script>

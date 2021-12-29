@@ -85,16 +85,7 @@ export default {
     circleAction(i) {
       this.selectedNumber = i;
     },
-    // newTab(i) {
-    //   open(`https://click.ecc.ac.jp/ecc/msatou/portfolio/${this.res[i].URL}`);
-    // },
   },
-  // watch: {
-  //   getSortNum(newVal, oldVal) {
-  //     // データの値が変化した時にコンソールに新しい値と古い値を出力
-  //     console.log(newVal, oldVal);
-  //   },
-  // },
   mounted() {
     fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
       .then((res) => {

@@ -17,7 +17,7 @@
 					a(href="#contact") contact
 			a(href="https://click.ecc.ac.jp/ecc/msatou/Philosophia/",target="_blank").foot__link--photo
 				span photography’s portfolio
-		small &copy; 2021 sato
+		small &copy; 2021 manami sato
 </template>
 
 <script>

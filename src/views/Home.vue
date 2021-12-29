@@ -21,7 +21,9 @@
 						svg(version="1.1",xmlns="http://www.w3.org/2000/svg",xmlns:xlink="http://www.w3.org/1999/xlink",x="0px",y="0px",viewBox="0 0 24 24",style="enable-background:new 0 0 24 24;",xml:space="preserve")
 							path(d="M16,22c1.1,0,2-0.9,2-2V8c0-3.3-2.7-6-6-6S6,4.7,6,8v12c0,1.1,0.9,2,2,2H16z M20,20c0,2.2-1.8,4-4,4H8c-2.2,0-4-1.8-4-4V8c0-4.4,3.6-8,8-8s8,3.6,8,8V20z M13,19c0,0.6-0.4,1-1,1s-1-0.4-1-1v-4c0-0.6,0.4-1,1-1s1,0.4,1,1V19z")
 					div scroll
+		//- FadeIn
 		p.index__slogan {{slogan}}
+		//- FadeIn
 		section.index__profile#about
 			div.index__profile--icon
 				div
@@ -50,46 +52,53 @@
 					span GitHub
 				a(href="https://click.ecc.ac.jp/ecc/msatou/Philosophia/",target="_blank")
 					span photography's portfolio
-		section.index__rcm#works
-			div
-				ul.index__rcm--sort
-					li(v-for="item in rcmSort",:key="item") {{item}}
-				h2.index__rcm--headline {{rcmHeadline}}
+		FadeIn
+			section.index__rcm#works
 				div
-					h3.index__rcm--ttl {{rcmTitle}}
-					p.index__rcm--catchphrase  {{rcmCatchphrase}}
-				p.index__rcm--txt {{rcmText}}
-				div.index__rcm--lang
-					div(v-for="item in rcmLang",:key="item")
-						img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
-				div.index__rcm--link
-					a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="page")
-						span Web site
-					a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="page")
-						span GitHub
-					router-link(:to="`/ecc/msatou/portfolio/web/${rcmData+1}/`")
-						span more
-			div.index__rcm--img
-				img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_rcm_mock.png",alt="Gifcle")
-		ul.index__logo
-			li(v-for="(ttl,i) in rcmPath")
-				router-link(:to="`/ecc/msatou/portfolio/web/${rcmId[i]}`")
-					img(:src="`${imgPath}index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
-					img(:src="`${imgPath}index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
-		router-link(:to="{name:'Web'}",@mouseover="worksBnrOver",@mouseleave="worksBnrLeave").index__work
-			span {{worksBnrTxt[worksBnrNum]}}
-		div.index__slogan {{slogan}}
-		Foot#contact
-		div.index__back
-			svg(xmlns="http://www.w3.org/2000/svg",viewBox="0 0 80.19 100.57")
-				path(d="M40.1,100.57a7,7,0,0,1-7-7V23.9L12,45.05a7,7,0,0,1-9.9-9.9L35.11,2.09a7,7,0,0,1,6-2h0l.45.08A7,7,0,0,1,45,2h0l33.09,33.1a7,7,0,0,1-9.9,9.9L47.1,23.9V93.57A7,7,0,0,1,40.1,100.57Z")
+					ul.index__rcm--sort
+						li(v-for="item in rcmSort",:key="item") {{item}}
+					h2.index__rcm--headline {{rcmHeadline}}
+					div
+						h3.index__rcm--ttl {{rcmTitle}}
+						p.index__rcm--catchphrase  {{rcmCatchphrase}}
+					p.index__rcm--txt {{rcmText}}
+					div.index__rcm--lang
+						div(v-for="item in rcmLang",:key="item")
+							img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
+					div.index__rcm--link
+						a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="page")
+							span Web site
+						a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="page")
+							span GitHub
+						router-link(:to="`/ecc/msatou/portfolio/web/${rcmData+1}/`")
+							span more
+				div.index__rcm--img
+					img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_rcm_mock.png",alt="Gifcle")
+		FadeIn
+			ul.index__logo
+				li(v-for="(ttl,i) in rcmPath")
+					router-link(:to="`/ecc/msatou/portfolio/web/${rcmId[i]}`")
+						img(:src="`${imgPath}index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
+						img(:src="`${imgPath}index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
+		FadeIn
+			router-link(:to="{name:'Web'}",@mouseover="worksBnrOver",@mouseleave="worksBnrLeave").index__work
+				span {{worksBnrTxt[worksBnrNum]}}
+		FadeIn
+			div.index__slogan {{slogan}}
+		FadeIn
+			Foot#contact
+		transition(name="fade1")
+			a(href="#",v-show="backFlag").index__back
+				svg(xmlns="http://www.w3.org/2000/svg",viewBox="0 0 80.19 100.57")
+					path(d="M40.1,100.57a7,7,0,0,1-7-7V23.9L12,45.05a7,7,0,0,1-9.9-9.9L35.11,2.09a7,7,0,0,1,6-2h0l.45.08A7,7,0,0,1,45,2h0l33.09,33.1a7,7,0,0,1-9.9,9.9L47.1,23.9V93.57A7,7,0,0,1,40.1,100.57Z")
 </template>
 <script>
+import FadeIn from "@/components/FadeIn.vue";
 import Foot from "@/components/Foot.vue";
-
 export default {
   name: "Home",
   components: {
+    FadeIn,
     Foot,
   },
   head: {
@@ -118,7 +127,12 @@ export default {
       rcmURL: "",
       slogan: "チームの軸を支えられるフロントエンドエンジニアになるために。",
       imgPath: "https://click.ecc.ac.jp/ecc/msatou/portfolio/img/",
+      scrollY: 0,
+      backFlag: false,
     };
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
     worksBnrOver() {
@@ -127,23 +141,43 @@ export default {
     worksBnrLeave() {
       this.worksBnrNum = 0;
     },
+    handleScroll() {
+      this.scrollY = window.scrollY;
+      console.log(this.scrollY);
+      if (!this.backFlag && this.scrollY > 300) {
+        this.backFlag = true;
+      }
+      if (this.backFlag && this.scrollY < 300) {
+        this.backFlag = false;
+      }
+    },
   },
-  mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        this.res = json.web;
-        this.rcmData = this.res.length - 1;
-        this.rcmSort = this.res[this.rcmData].sort;
-        this.rcmTitle = this.res[this.rcmData].title;
-        this.rcmHeadline = this.res[this.rcmData].headline;
-        this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
-        this.rcmText = this.res[this.rcmData].text;
-        this.rcmLang = this.res[this.rcmData].lang;
-        this.rcmURL = this.res[this.rcmData].URL;
-      });
+  // mounted() {
+  //   fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((json) => {
+  //       this.res = json.web;
+  //       this.rcmData = this.res.length - 1;
+  //       this.rcmSort = this.res[this.rcmData].sort;
+  //       this.rcmTitle = this.res[this.rcmData].title;
+  //       this.rcmHeadline = this.res[this.rcmData].headline;
+  //       this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
+  //       this.rcmText = this.res[this.rcmData].text;
+  //       this.rcmLang = this.res[this.rcmData].lang;
+  //       this.rcmURL = this.res[this.rcmData].URL;
+  //     });
+  // },
+  updated() {
+    // let profile = this.$refs.profile;
+    // this.profileTop = profile.getBoundingClientRect().top;
+    // console.log("profileTop" + this.profileTop);
+    // window.addEventListener("scroll", (el) => {
+    //   console.log(el);
+    //   // this.scrollY = window.scrollY;
+    //   // console.log(this.scrollY);
+    // });
   },
 };
 </script>
@@ -250,7 +284,6 @@ navここから
   align-items: center;
   width: 100vw;
   height: 80px;
-  // background: rgba($color: $white, $alpha: 0.8);
   padding: 0 10%;
   font-size: 2rem;
   font-weight: bold;
@@ -520,23 +553,28 @@ backここから
   height: 56px;
   background: $mainColor;
   transition: 0.2s background;
-  position: absolute;
-  right: 80px;
-  bottom: 80px;
+  position: fixed;
+  right: 48px;
+  bottom: 64px;
   mix-blend-mode: multiply;
+  z-index: 100;
   svg {
-    width: 32px;
-    transform: 0;
-    transition: 0.2s transform, 0.2s background;
+    width: 16px;
+    transform: translateY(0);
+    // transition: 0.2s transform;
   }
   path {
     fill: $baceColor;
+    transition: 0.2s fill;
   }
   &:hover {
     background: $accentColor;
-    svg {
-      background: $mainColor;
-      transform: transrateY(2px);
+    cursor: pointer;
+    // svg {
+    //   transform: translateY(-3px);
+    // }
+    path {
+      fill: $mainColor;
     }
   }
 }
@@ -699,7 +737,6 @@ backここまで
     @include throughTtl("</about>", auto, 0, 5%, auto, $fs: 6rem);
     &--icon {
       width: 60%;
-      // max-width: 360px;
       margin: 0 auto;
     }
     &--txt {
@@ -753,5 +790,16 @@ backここまで
       }
     }
   }
+}
+.fade1-enter-active,
+.fade1-leave-active {
+  transition: opacity 0.5s, transform 0.5s;
+}
+.fade1-enter, .fade1-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(32px);
+}
+.fade1-leave, .fade1-enter-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: 0;
 }
 </style>

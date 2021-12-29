@@ -10,7 +10,7 @@ import WebData from "../views/WebData.vue";
 Vue.use(VueRouter);
 Vue.use(VueHead);
 
-const route = "/";
+const route = "/ecc/msatou/portfolio/";
 // /ecc/msatou/portfolio/
 
 const routes = [
