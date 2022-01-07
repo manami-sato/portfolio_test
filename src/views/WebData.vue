@@ -11,7 +11,7 @@
 				p.data__description--txt {{data.text}}
 				div.data__description--lang
 					div(v-for="item in data.lang",:key="item")
-						img(:src="`https://click.ecc.ac.jp/ecc/msatou/portfolio/img/lang_${item}.svg`",:alt="`${item}`")
+						img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
 		section.data__detail
 			h2.data__detail--ttl {{data.headline}}
 			div
@@ -34,8 +34,10 @@
 </template>
 
 <script>
+import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "Data",
+  mixins: [Mixin],
   props: {
     id: Number,
   },
@@ -63,14 +65,12 @@ export default {
       return {
         img:
           this.data.img &&
-          `https://click.ecc.ac.jp/ecc/msatou/portfolio/img/web_0${this.data.year}_${this.data.img}.png`,
+          `${this.path}img/web_0${this.data.year}_${this.data.img}.png`,
       };
     },
     dataLogo() {
       return {
-        img:
-          this.data.img &&
-          `https://click.ecc.ac.jp/ecc/msatou/portfolio/img/works_logo_${this.data.img}.svg`,
+        img: this.data.img && `${this.path}img/works_logo_${this.data.img}.svg`,
       };
     },
   },
@@ -81,7 +81,7 @@ export default {
   },
   mounted() {
     this.dataId = this.$route.params.id - 1;
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
+    fetch(`${this.productsData}`)
       .then((res) => {
         return res.json();
       })
@@ -185,7 +185,6 @@ export default {
       width: 120px;
       height: inherit;
       background: $mainColor;
-      // border: 8px solid $mainColor;
       position: relative;
       transition: 0.2s background;
       cursor: pointer;

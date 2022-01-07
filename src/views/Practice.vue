@@ -1,12 +1,11 @@
 <template lang="pug">
 	main
-		WorksHead(value="tra")
+		WorksHead(value="practice",@increment="getSortNum = $event")
 		div.practice
-			article(v-for="(data,i) in res",:key="i",:data="data.year")
-				h3.practice__ttl
-					div
-						|{{data.title}}
-						span {{data.sort}}
+			article(v-for="(data,i) in res",:key="i",:data="data.year",v-if="0 == getSortNum||data.year == getSortNum")
+				div.practice__info
+					h3.practice__info--ttl {{data.title}}
+					span.practice__info--sort {{data.sort}}
 				div.practice__txt
 					div {{data.text}}
 				ul.practice__link
@@ -16,18 +15,22 @@
 					li
 						a(:href="`https://github.com/manami-sato/practice-${data.url}/`",target="page")
 							span GitHub
+			div(v-if="getSortNum == 1||getSortNum == 3")
+				p.practice__none coming soon...
 		Foot
 </template>
 
 <script>
 import WorksHead from "@/components/WorksHead.vue";
 import Foot from "@/components/Foot.vue";
+import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "Web",
   components: {
     WorksHead,
     Foot,
   },
+  mixins: [Mixin],
   head: {
     title() {
       return {
@@ -40,16 +43,18 @@ export default {
   data() {
     return {
       res: [],
+      getSortNum: 0,
     };
   },
   mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
+    fetch(`${this.productsData}`)
       .then((res) => {
         return res.json();
       })
       .then((json) => {
         this.res = json.practice;
       });
+    console.log(this.getSortNum);
   },
 };
 </script>
@@ -63,6 +68,7 @@ export default {
   width: 80%;
   min-width: 600px;
   margin: 0 auto;
+  @include contentsNone();
   article {
     width: 45%;
     min-width: 430px;
@@ -70,21 +76,8 @@ export default {
     position: relative;
     padding-bottom: 48px;
   }
-  &__ttl {
-    color: $mainColor;
-    font-size: 2rem;
-    // span {
-    //   display: inline-flex;
-    //   align-items: center;
-    //   height: 24px;
-    //   color: $white;
-    //   background: $accentColor;
-    //   border-radius: 16px;
-    //   padding: 2px 12px 0;
-    //   margin: 0 0 0 8px;
-    //   font-weight: bold;
-    //   font-size: 1.3rem;
-    // }
+  &__info {
+    @include worksInfoSet($w: 40px, $ml: 8px);
   }
   &__txt {
     div {

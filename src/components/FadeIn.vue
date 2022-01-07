@@ -1,6 +1,6 @@
 <template lang="pug">
-		div(:class="{fadeIn: visible}")
-			slot(v-show="visible")
+  div(:class="{fadeIn: visible}")
+    slot(v-show="visible")
 </template>
 
 <script>

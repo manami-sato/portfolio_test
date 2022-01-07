@@ -203,3 +203,25 @@ $font: "Montserrat Alternates", sans-serif;
     text-align: center;
   }
 }
+
+@mixin worksInfoSet($w: 72px, $ml: 16px) {
+  display: flex;
+  align-items: center;
+  &--ttl {
+    color: $mainColor;
+    font-size: 2rem;
+  }
+  &--sort {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $w;
+    height: 24px;
+    color: $white;
+    background: $accentColor;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: $ml;
+  }
+}

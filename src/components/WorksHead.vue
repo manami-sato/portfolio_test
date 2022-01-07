@@ -18,7 +18,7 @@ export default {
   props: ["value"],
   data() {
     return {
-      page: ["web", "gra", "tra"],
+      page: ["web", "graphic", "practice"],
       // sortTtl: ["全て", "1年", "2年", "3年"],
       // sortFlag: [true, false, false, false],
       sortIndex: 0,

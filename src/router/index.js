@@ -12,6 +12,7 @@ Vue.use(VueHead);
 
 const route = "/ecc/msatou/portfolio/";
 // /ecc/msatou/portfolio/
+// manami-sato.github.io/portfolio/
 
 const routes = [
   {

@@ -4,7 +4,7 @@
 		div(v-if="getSortNum == 0").web
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",ref="item",:class=" i > 6 ? 'worksIndex1':'worksIndex2'",:style="{order:worksOrder - i}").web__contents.contentsActive
 				div.web__contents--img
-					img(:src="`${imgPath}web_0${data.year}_${data.img}.png`")
+					img(:src="`${path}img/web_0${data.year}_${data.img}.png`")
 				div
 					ul.web__contents--sort
 						li(v-for="item in data.sort",:key="item") {{item}}
@@ -15,16 +15,16 @@
 					p.web__contents--txt {{data.text}}
 					div.web__contents--lang
 						div(v-for="item in data.lang",:key="item")
-							img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
+							img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
 					div.web__contents--link
 						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
 							span {{data.link[i].name}}
-						router-link(:to="`/ecc/msatou/portfolio/web/${i+1}`")
+						router-link(:to="`${routerPath}web/${i+1}`")
 							span more
 		div.web
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",v-if="getSortNum == data.year",class="contentsActive",ref="item",:style="{order:worksOrder - i}").web__contents
 				div.web__contents--img
-					img(:src="`${imgPath}web_0${data.year}_${data.img}.png`")
+					img(:src="`${path}img/web_0${data.year}_${data.img}.png`")
 				div.web__contents--wrap
 					ul.web__contents--sort
 						li(v-for="item in data.sort",:key="item") {{item}}
@@ -35,11 +35,11 @@
 					p.web__contents--txt {{data.text}}
 					div.web__contents--lang
 						div(v-for="item in data.lang",:key="item")
-							img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
+							img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
 					div.web__contents--link
 						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
 							span {{data.link[i].name}}
-						router-link(:to="`/ecc/msatou/portfolio/web/${i+1}`")
+						router-link(:to="`${routerPath}web/${i+1}`")
 							span more
 		div(v-if="getSortNum == 3")
 			p.graphic__none coming soon...
@@ -53,12 +53,14 @@
 <script>
 import WorksHead from "@/components/WorksHead.vue";
 import Foot from "@/components/Foot.vue";
+import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "Web",
   components: {
     WorksHead,
     Foot,
   },
+  mixins: [Mixin],
   head: {
     title() {
       return {
@@ -78,7 +80,6 @@ export default {
       data: [],
       num: 0,
       worksOrder: 0,
-      imgPath: "https://click.ecc.ac.jp/ecc/msatou/portfolio/img/",
     };
   },
   methods: {
@@ -87,7 +88,7 @@ export default {
     },
   },
   mounted() {
-    fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
+    fetch(`${this.productsData}`)
       .then((res) => {
         return res.json();
       })

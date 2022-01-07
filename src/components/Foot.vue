@@ -4,13 +4,13 @@
 			p.foot__contact--txt ご連絡お待ちしております。
 			a(href="mailto:manamisato2001@gmail.com").foot__contact--mail
 				span manamisato2001@gmail.com
-		div.foot__link
+		div(:style="{backgroundImage:'url(' + path + 'img/foot.png)'}").foot__link
 			router-link(:to="{name:'Home'}").foot__link--index
-				img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/logo.svg",alt="佐藤真奈実' Portfolio")
+				img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
 			//- ul
 				li
 					router-link(:to="{name:'Home'}")
-						img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/logo.svg",alt="佐藤真奈実' Portfolio")
+						img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
 				li
 					router-link(:to="{name:'Web'}") works
 				li
@@ -21,8 +21,10 @@
 </template>
 
 <script>
+import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "Foot",
+  mixins: [Mixin],
 };
 </script>
 
@@ -73,7 +75,6 @@ export default {
   flex-wrap: wrap;
   // flex-direction: column;
   min-height: 200px;
-  background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/foot.png");
   background-size: contain;
   background-position: center bottom -1px;
   background-repeat: repeat no-repeat;

@@ -5,7 +5,9 @@
 </template>
 
 <script>
+// import Mixin from "@/mixins/Mixin.vue";
 export default {
+  // mixins: [Mixin],
   head: {
     meta: [
       {
@@ -40,5 +42,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss"></style>

@@ -3,7 +3,7 @@
 		nav.index__nav
 			header.index__nav--logo
 				a(href="#")
-					img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/logo.svg",alt="佐藤真奈実' Portfolio")
+					img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
 			ul.index__nav--link
 				li
 					a(href="#about") about
@@ -11,11 +11,11 @@
 					a(href="#works") works
 				li
 					a(href="#contact") contact
-		section.index__fv
+		section(:style="{backgroundImage:'url(' + path + 'img/pf_illust.png)'}").index__fv
 			div.index__fv--illust
 			div
 				h1.index__fv--logo
-					img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/logo.svg",alt="佐藤真奈実' Portfolio")
+					img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
 				div
 					div.index__fv--scroll
 						svg(version="1.1",xmlns="http://www.w3.org/2000/svg",xmlns:xlink="http://www.w3.org/1999/xlink",x="0px",y="0px",viewBox="0 0 24 24",style="enable-background:new 0 0 24 24;",xml:space="preserve")
@@ -28,8 +28,8 @@
 			div.index__profile--icon
 				div
 					div
-						img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_about_icon.png",alt="アイコン")
-						img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_about_icon_on.png",alt="アイコン")
+						img(:src="`${path}img/index_about_icon.png`",alt="アイコン")
+						img(:src="`${path}img/index_about_icon_on.png`",alt="アイコン")
 			div.index__profile--txt
 				h2
 					|カメラとフロントエンドに<br>
@@ -44,7 +44,7 @@
 					|記法に沿い、編集のしやすいコードを書けるよう勉強中です。
 				ul
 					li(v-for="(lang, i) in langData")
-						img(:src="`${imgPath}lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
+						img(:src="`${path}img/lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
 				p
 					|趣味：カメラです！桜と紅葉の時季には必ず撮影に行きます！
 			div.index__profile--link
@@ -64,22 +64,22 @@
 					p.index__rcm--txt {{rcmText}}
 					div.index__rcm--lang
 						div(v-for="item in rcmLang",:key="item")
-							img(:src="`${imgPath}lang_${item}.svg`",:alt="`${item}`")
+							img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
 					div.index__rcm--link
 						a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="page")
 							span Web site
 						a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="page")
 							span GitHub
-						router-link(:to="`/ecc/msatou/portfolio/web/${rcmData+1}/`")
+						router-link(:to="`${routerPath}web/${rcmData+1}/`")
 							span more
 				div.index__rcm--img
-					img(src="https://click.ecc.ac.jp/ecc/msatou/portfolio/img/index_rcm_mock.png",alt="Gifcle")
+					img(:src="`${path}img/index_rcm_mock.png`",alt="Gifcle")
 		FadeIn
 			ul.index__logo
 				li(v-for="(ttl,i) in rcmPath")
-					router-link(:to="`/ecc/msatou/portfolio/web/${rcmId[i]}`")
-						img(:src="`${imgPath}index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
-						img(:src="`${imgPath}index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
+					router-link(:to="`${routerPath}web/${rcmId[i]}`")
+						img(:src="`${path}img/index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
+						img(:src="`${path}img/index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
 		FadeIn
 			router-link(:to="{name:'Web'}",@mouseover="worksBnrOver",@mouseleave="worksBnrLeave").index__work
 				span {{worksBnrTxt[worksBnrNum]}}
@@ -95,12 +95,14 @@
 <script>
 import FadeIn from "@/components/FadeIn.vue";
 import Foot from "@/components/Foot.vue";
+import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "Home",
   components: {
     FadeIn,
     Foot,
   },
+  mixins: [Mixin],
   head: {
     title() {
       return {
@@ -126,7 +128,6 @@ export default {
       rcmLang: "",
       rcmURL: "",
       slogan: "チームの軸を支えられるフロントエンドエンジニアになるために。",
-      imgPath: "https://click.ecc.ac.jp/ecc/msatou/portfolio/img/",
       scrollY: 0,
       backFlag: false,
     };
@@ -143,7 +144,7 @@ export default {
     },
     handleScroll() {
       this.scrollY = window.scrollY;
-      console.log(this.scrollY);
+      // console.log(this.scrollY);
       if (!this.backFlag && this.scrollY > 300) {
         this.backFlag = true;
       }
@@ -152,32 +153,32 @@ export default {
       }
     },
   },
-  // mounted() {
-  //   fetch("https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php")
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((json) => {
-  //       this.res = json.web;
-  //       this.rcmData = this.res.length - 1;
-  //       this.rcmSort = this.res[this.rcmData].sort;
-  //       this.rcmTitle = this.res[this.rcmData].title;
-  //       this.rcmHeadline = this.res[this.rcmData].headline;
-  //       this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
-  //       this.rcmText = this.res[this.rcmData].text;
-  //       this.rcmLang = this.res[this.rcmData].lang;
-  //       this.rcmURL = this.res[this.rcmData].URL;
-  //     });
-  // },
+  mounted() {
+    fetch(`${this.productsData}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        this.res = json.web;
+        this.rcmData = this.res.length - 1;
+        this.rcmSort = this.res[this.rcmData].sort;
+        this.rcmTitle = this.res[this.rcmData].title;
+        this.rcmHeadline = this.res[this.rcmData].headline;
+        this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
+        this.rcmText = this.res[this.rcmData].text;
+        this.rcmLang = this.res[this.rcmData].lang;
+        this.rcmURL = this.res[this.rcmData].URL;
+      });
+  },
   updated() {
-    // let profile = this.$refs.profile;
-    // this.profileTop = profile.getBoundingClientRect().top;
-    // console.log("profileTop" + this.profileTop);
-    // window.addEventListener("scroll", (el) => {
-    //   console.log(el);
-    //   // this.scrollY = window.scrollY;
-    //   // console.log(this.scrollY);
-    // });
+    let profile = this.$refs.profile;
+    this.profileTop = profile.getBoundingClientRect().top;
+    console.log("profileTop" + this.profileTop);
+    window.addEventListener("scroll", (el) => {
+      console.log(el);
+      // this.scrollY = window.scrollY;
+      // console.log(this.scrollY);
+    });
   },
 };
 </script>
@@ -189,9 +190,8 @@ fvここから
 ------------------------------ */
 .index__fv {
   display: flex;
-  background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_illust.png")
-    no-repeat;
   background-size: contain;
+  background-repeat: no-repeat;
   margin: 0 auto;
   &--illust {
     width: 40%;
@@ -723,8 +723,6 @@ backここまで
   .index__fv {
     width: 100vw;
     height: 60vh;
-    background: url("https://click.ecc.ac.jp/ecc/msatou/portfolio/img/pf_illust.png")
-      no-repeat;
     background-size: contain;
     background-position: 0 80px;
   }
