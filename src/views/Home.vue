@@ -54,23 +54,21 @@
 					span photography's portfolio
 		FadeIn
 			section.index__rcm#works
-				div
+				div(v-for="(item,itemKey) in rcmData",:key="itemKey")
 					ul.index__rcm--sort
-						li(v-for="item in rcmSort",:key="item") {{item}}
-					h2.index__rcm--headline {{rcmHeadline}}
+						li(v-for="(sort,sortKey) in item.sort",:key="sortKey") {{sort}}
+					h2.index__rcm--headline {{item.headline}}
 					div
-						h3.index__rcm--ttl {{rcmTitle}}
-						p.index__rcm--catchphrase  {{rcmCatchphrase}}
-					p.index__rcm--txt {{rcmText}}
+						h3.index__rcm--ttl {{item.title}}
+						p.index__rcm--catchphrase  {{item.catchphrase}}
+					p.index__rcm--txt {{item.text}}
 					div.index__rcm--lang
-						div(v-for="item in rcmLang",:key="item")
-							img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
+						div(v-for="(lang,langKey) in item.lang",:key="langKey")
+							img(:src="`${path}img/lang_${lang}.svg`",:alt="`${lang}`")
 					div.index__rcm--link
-						a(:href="`https://manami-sato.github.io/${rcmURL}/`",target="page")
-							span Web site
-						a(:href="`https://github.com/manami-sato/${rcmURL}/`",target="page")
-							span GitHub
-						router-link(:to="`${routerPath}web/${rcmData+1}/`")
+						a(v-for="(link,linkKey) in item.link.slice(0,2)",:key="linkKey",:href="`${link.url}`",target="page")
+							span {{link.name}}
+						router-link(:to="`${routerPath}web/${res.length}/`")
 							span more
 				div.index__rcm--img
 					img(:src="`${path}img/index_rcm_mock.png`",alt="Gifcle")
@@ -120,13 +118,6 @@ export default {
       rcmId: [8, 5, 9, 3, 6],
       worksBnrTxt: ["作品をもっとご覧になりませんか？", "view more!"],
       worksBnrNum: 0,
-      rcmSort: "",
-      rcmTitle: "",
-      rcmHeadline: "",
-      rcmCatchphrase: "",
-      rcmText: "",
-      rcmLang: "",
-      rcmURL: "",
       slogan: "チームの軸を支えられるフロントエンドエンジニアになるために。",
       scrollY: 0,
       backFlag: false,
@@ -144,7 +135,6 @@ export default {
     },
     handleScroll() {
       this.scrollY = window.scrollY;
-      // console.log(this.scrollY);
       if (!this.backFlag && this.scrollY > 300) {
         this.backFlag = true;
       }
@@ -160,25 +150,13 @@ export default {
       })
       .then((json) => {
         this.res = json.web;
-        this.rcmData = this.res.length - 1;
-        this.rcmSort = this.res[this.rcmData].sort;
-        this.rcmTitle = this.res[this.rcmData].title;
-        this.rcmHeadline = this.res[this.rcmData].headline;
-        this.rcmCatchphrase = this.res[this.rcmData].catchphrase;
-        this.rcmText = this.res[this.rcmData].text;
-        this.rcmLang = this.res[this.rcmData].lang;
-        this.rcmURL = this.res[this.rcmData].URL;
+        this.rcmData = this.res.slice(this.res.length - 1, this.res.length);
       });
   },
   updated() {
-    let profile = this.$refs.profile;
-    this.profileTop = profile.getBoundingClientRect().top;
-    console.log("profileTop" + this.profileTop);
-    window.addEventListener("scroll", (el) => {
-      console.log(el);
-      // this.scrollY = window.scrollY;
-      // console.log(this.scrollY);
-    });
+    if (this.$refs.profile == "") {
+      this.profileTop = this.$refs.profile.getBoundingClientRect().top;
+    }
   },
 };
 </script>
@@ -466,7 +444,8 @@ sloganここまで
   width: 85vw;
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom: 32px;
+  // padding-bottom: 32px;
+  padding: 32px 0;
   li {
     width: 20%;
     background-position: center center;

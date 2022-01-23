@@ -70,7 +70,7 @@ export default {
     },
     dataLogo() {
       return {
-        img: this.data.img && `${this.path}img/works_logo_${this.data.img}.svg`,
+        img: this.data.img && `${this.path}img/logo_${this.data.img}.png`,
       };
     },
   },

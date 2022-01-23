@@ -5,6 +5,7 @@ export default {
       path: "https://click.ecc.ac.jp/ecc/msatou/portfolio/",
       // path: "https://manami-sato.github.io/portfolio/",
       routerPath: "/ecc/msatou/portfolio/",
+      // routerPath: "/",
       // productsData: "https://manami-sato.github.io/portfolio/products.php",
       productsData: "https://click.ecc.ac.jp/ecc/msatou/portfolio/products.php",
     };

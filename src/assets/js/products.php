@@ -261,7 +261,7 @@ $products = [
         [
           "id" => "2",
           "name" => "App",
-          "url" => "https://manami-sato.github.io/friboApp/"
+          "url" => "https://manami-sato.github.io/fribo_app/"
         ],
         [
           "id" => "3",
@@ -271,7 +271,7 @@ $products = [
         [
           "id" => "4",
           "name" => "GitHub（App）",
-          "url" => "https://github.com/manami-sato/friboApp/"
+          "url" => "https://github.com/manami-sato/fribo_app/"
         ],
       ],
       "headline" => "ログインに関する基礎的な機能を学習",
@@ -320,27 +320,27 @@ $products = [
         [
           "id" => "1",
           "name" => "Web site",
-          "url" => "https://manami-sato.github.io/gifcle/"
+          "url" => "https://manami-sato.github.io/gifcle/",
         ],
         [
           "id" => "2",
           "name" => "App",
-          "url" => "https://manami-sato.github.io/gifcleApp/"
+          "url" => "https://manami-sato.github.io/gifcle_app/",
         ],
         [
           "id" => "3",
           "name" => "GitHub（Web）",
-          "url" => "https://github.com/manami-sato/gifcle/"
+          "url" => "https://github.com/manami-sato/gifcle/",
         ],
         [
           "id" => "4",
           "name" => "GitHub（App）",
-          "url" => "https://github.com/manami-sato/gifcleApp/"
+          "url" => "https://github.com/manami-sato/gifcle_app/",
         ],
         [
           "id" => "5",
           "name" => "コンセプトシート",
-          "url" => "https://click.ecc.ac.jp/ecc/msatou/portfolio/document/gifcle.pdf"
+          "url" => "https://click.ecc.ac.jp/ecc/msatou/portfolio/document/gifcle.pdf",
         ],
       ],
       "headline" => "Webアプリを学び制作の幅が広がる",
@@ -349,27 +349,59 @@ $products = [
       "introspection" => "新しいテーマを生み出してUXを構築する難しさを体感。デザインやアプリのトップ画面からサービスへのワクワク感があまり得られず、このサービスの本質の楽しさを表現しきれなかった。",
       "color" => "#FFCE00",
     ],
+    [
+      "year" => "2",
+      "img" => "raict",
+      "title" => "raict",
+      "catchphrase" => "オンラインライブでも意思疎通！",
+      "sort" => [
+        "2年後期",
+        "チーム制作",
+      ],
+      "text" => "オンラインライブでスマートフォンをペンライトのように振って、アーティストと盛り上がりを共有できるサービス。従来のオンラインライブの「ファンとアーティストの繋がりを感じにくい」点を、「ペンライトを振る」という慣れた動作で解決する、新しい配信プラットフォームです。ライブ視聴中に沢山スマホを振って、ステージに熱量を届けよう！",
+      "lang" => [
+        "Vue",
+        "JSON",
+      ],
+      "link" => [
+        [
+          "id" => "1",
+          "name" => "App",
+          "url" => "https://click.ecc.ac.jp/ecc/msatou/raict_app/",
+        ],
+        [
+          "id" => "2",
+          "name" => "Web",
+          "url" => "https://click.ecc.ac.jp/ecc/msatou/raict_login/",
+        ],
+        // [
+        //   "id" => "3",
+        //   "name" => "Web（LP）",
+        //   "url" => "https://click.ecc.ac.jp/ecc/hkusano/raict/",
+        // ],
+        [
+          "id" => "4",
+          "name" => "GitHub（App）",
+          "url" => "https://github.com/manami-sato/raict_app/",
+        ],
+        [
+          "id" => "5",
+          "name" => "GitHub（Web）",
+          "url" => "https://github.com/manami-sato/raict_login/",
+        ],
+        [
+          "id" => "6",
+          "name" => "コンセプトシート",
+          "url" => "https://click.ecc.ac.jp/ecc/msatou/portfolio/document/raict.pdf",
+        ],
+      ],
+      "headline" => "KJ法で洗い出した課題点から解決まで",
+      "chance" => "コロナ禍においての課題点というテーマからチームメンバーとKJ法を活用して意見を出し合い、オンラインライブの満足度に着目。オフラインライブと比較し、ペンライトという要素を盛り込むことで満足度向上をはかった。",
+      "target" => "Vueを使ってウェブアプリを制作。JSONデータを作成し、propsで動的セグメントを受け渡すことで複雑な動的ルートマッチングを実装した。スワイプでのペンライトの選択など、デザイナーの希望に沿ったコードを書くよう注力した。",
+      "introspection" => "",
+      "color" => "#AA14F0",
+    ],
   ],
-  // [
-  //   "year" => "2",
-  //   "img" => "raict",
-  //   "title" => "raict",
-  //   "catchphrase" => "",
-  //   "sort" => [
-  //     "2年後期",
-  //     "チーム制作",
-  //   ],
-  //   "text" => "オンラインライブでスマートフォンをペンライトのように振って、アーティストと盛り上がりを共有できるサービス。従来のオンラインライブの「ファンとアーティストの繋がりを感じにくい」点を、「ペンライトを振る」という慣れた動作で解決する、新しい配信プラットフォームです。ライブ視聴中に沢山スマホを振って、ステージに熱量を届けよう！",
-  //   "lang" => [
-  //     "Vue",
-  //   ],
-  //   "link" => "raict",
-  //   "headline" => "",
-  //   "chance" => "",
-  //   "target" => "Vueを使ってウェブアプリを作ること。また、本アプリに重要な機能である「振る」という行為を数値化した。",
-  //   "introspection" => "",
-  //   "color" => "",
-  // ],
   "practice" => [
     [
       "year" => "2",
@@ -430,7 +462,9 @@ print json_encode($products);
 //   "lang" => [
 //     "使用言語",
 //   ],
-//   "link" => "各種link",
+//   "link" => [
+//     "各種link",
+//   ],
 //   "headline" => "技術の見出し",
 //   "chance" => "問題定義／企画のきっかけ",
 //   "target" => "フロントエンドにおける技術目標",

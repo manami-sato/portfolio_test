@@ -1,71 +1,43 @@
 <template lang="pug">
 	header.head
 		div.head__link
-			router-link(:to="{name:'Web'}",:class="value == page[0] ? 'head__link--on':'head__link--off'") web site
-			router-link(:to="{name:'Graphic'}",:class="value == page[1] ? 'head__link--on':'head__link--off'") graphic
-			router-link(:to="{name:'Practice'}",:class="value == page[2] ? 'head__link--on':'head__link--off'") practice
+			router-link(v-for="(item,i) in page",:key="i",:to="`${routerPath}${item.path}`",:class="value == item.ttl ? 'head__link--on':'head__link--off'") {{item.ttl}}
 		ul.head__sort
-			li(@click="sortAction0",:class="{sortActive:sortFlag0}").head__sort--item 全て
-			li(@click="sortAction1",:class="{sortActive:sortFlag1}").head__sort--item 1年
-			li(@click="sortAction2",:class="{sortActive:sortFlag2}").head__sort--item 2年
-			li(@click="sortAction3",:class="{sortActive:sortFlag3}").head__sort--item 3年
-			//- li(v-for="(item,index) in sortTtl.length",:key="index",@click="sortAction(index)",:class="{sortActive:sortFlag[index]}").head__sort--item {sortTtl[index]}}
+			li(v-for="(item,i) in sort",:key="i",@click="sortAction(i)",:class="{sortActive:item.flag}").head__sort--item {{item.ttl}}
 </template>
 
 <script>
+import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "WorksHead",
+  mixins: [Mixin],
   props: ["value"],
   data() {
     return {
-      page: ["web", "graphic", "practice"],
-      // sortTtl: ["全て", "1年", "2年", "3年"],
-      // sortFlag: [true, false, false, false],
+      page: [
+        { path: "web", ttl: "web site" },
+        { path: "graphic", ttl: "graphic" },
+        { path: "practice", ttl: "practice" },
+      ],
+      sort: [
+        { ttl: "全て", flag: true },
+        { ttl: "1年", flag: false },
+        { ttl: "2年", flag: false },
+        { ttl: "3年", flag: false },
+      ],
       sortIndex: 0,
-      sortFlag0: true,
-      sortFlag1: false,
-      sortFlag2: false,
-      sortFlag3: false,
     };
   },
   methods: {
-    // sortAction(index) {
-    //   this.sortIndex = index;
-    //   for (let i = 0; i < this.sortFlag.length; i++) {
-    //     if (this.sortFlag[i]) {
-    //       this.sortFlag[i] = !this.sortFlag[i];
-    //     }
-    //   }
-    //   this.sortFlag[index] = !this.sortFlag[index];
-    //   this.$emit("increment", this.sortIndex);
-    // },
-    sortAction0() {
-      this.sortFlag0 = true;
-      this.sortFlag1 = false;
-      this.sortFlag2 = false;
-      this.sortFlag3 = false;
-      this.$emit("increment", 0);
-    },
-    sortAction1() {
-      this.sortFlag0 = false;
-      this.sortFlag1 = true;
-      this.sortFlag2 = false;
-      this.sortFlag3 = false;
-      this.$emit("increment", 1);
-    },
-    sortAction2() {
-      this.sortFlag0 = false;
-      this.sortFlag1 = false;
-      this.sortFlag2 = true;
-      this.sortFlag3 = false;
-      this.$emit("increment", 2);
-    },
-    sortAction3() {
-      this.sortFlag0 = false;
-      this.sortFlag1 = false;
-      this.sortFlag2 = false;
-      this.sortFlag3 = true;
-      this.$emit("increment", 3);
+    sortAction(i) {
+      this.sortIndex = i;
+      for (let index = 0; index < this.sort.length; index++) {
+        if (this.sort[index].flag) {
+          this.sort[index].flag = !this.sort[index].flag;
+        }
+      }
+      this.sort[i].flag = !this.sort[i].flag;
+      this.$emit("increment", this.sortIndex);
     },
   },
 };

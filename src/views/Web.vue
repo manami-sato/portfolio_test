@@ -1,8 +1,8 @@
 <template lang="pug">
 	main
-		WorksHead(value="web",@increment="getSortNum = $event")
+		WorksHead(value="web site",@increment="getSortNum = $event")
 		div(v-if="getSortNum == 0").web
-			section(v-for="(data,i) in res",:key="i",:data-year="data.year",ref="item",:class=" i > 6 ? 'worksIndex1':'worksIndex2'",:style="{order:worksOrder - i}").web__contents.contentsActive
+			section(v-for="(data,i) in res",:key="i",:data-year="data.year",ref="item",:class=" i > 7 ? 'worksIndex1':'worksIndex2'",:style="{order:worksOrder - i}").web__contents.contentsActive
 				div.web__contents--img
 					img(:src="`${path}img/web_0${data.year}_${data.img}.png`")
 				div
