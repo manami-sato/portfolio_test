@@ -13,13 +13,18 @@
 						h3.web__contents--ttl {{data.title}}
 						p.web__contents--catchphrase {{data.catchphrase}}
 					p.web__contents--txt {{data.text}}
-					div.web__contents--lang
-						div(v-for="item in data.lang",:key="item")
-							img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
+					div.web__contents--list
+						div
+							span 使用言語
+							span(v-for="(lang,langKey) in data.lang",:key="langKey") {{lang}}
+								//- img(:src="`${path}img/lang_${lang}.svg`",:alt="`${lang}`")
+						div
+							span 役割分担
+							span(v-for="(role,roleKey) in data.role",:key="roleKey") {{role}}
 					div.web__contents--link
 						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
 							span {{data.link[i].name}}
-						router-link(:to="`${routerPath}web/${i+1}`")
+						router-link(:to="`${routerPath}web/${data.img}`")
 							span more
 		div.web
 			section(v-for="(data,i) in res",:key="i",:data-year="data.year",v-if="getSortNum == data.year",class="contentsActive",ref="item",:style="{order:worksOrder - i}").web__contents
@@ -33,13 +38,18 @@
 						h3.web__contents--ttl {{data.title}}
 						p.web__contents--catchphrase {{data.catchphrase}}
 					p.web__contents--txt {{data.text}}
-					div.web__contents--lang
-						div(v-for="item in data.lang",:key="item")
-							img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
+					div.web__contents--list
+						div
+							span 使用言語
+							span(v-for="(lang,langKey) in data.lang",:key="langKey") {{lang}}
+								//- img(:src="`${path}img/lang_${lang}.svg`",:alt="`${lang}`")
+						div
+							span 役割分担
+							span(v-for="(role,roleKey) in data.role",:key="roleKey") {{role}}
 					div.web__contents--link
 						a(v-for="(link,i) in data.link.slice(0,2)",:key="data.link[i].id",:href="data.link[i].url",target="_blank")
 							span {{data.link[i].name}}
-						router-link(:to="`${routerPath}web/${i+1}`")
+						router-link(:to="`${routerPath}web/${data.img}`")
 							span more
 		div(v-if="getSortNum == 3")
 			p.graphic__none coming soon...

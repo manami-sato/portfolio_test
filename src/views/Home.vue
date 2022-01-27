@@ -42,9 +42,13 @@
 					|小学生の頃にHTMLやCSSに触れ、コーディングの楽しさを<br>
 					|感じていたことからこの分野を目指しました。<br>
 					|記法に沿い、編集のしやすいコードを書けるよう勉強中です。
-				ul
-					li(v-for="(lang, i) in langData")
-						img(:src="`${path}img/lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
+				div.index__profile--txt--skills
+					span Skills：
+					ul
+						li(v-for="(lang,langKey) in langData",:key="langKey") {{lang}}
+					//- ul
+						li(v-for="(lang, i) in langData")
+							img(:src="`${path}img/lang_${langData[i]}.svg`",:alt="`${langData[i]}`")
 				p
 					|趣味：カメラです！桜と紅葉の時季には必ず撮影に行きます！
 			div.index__profile--link
@@ -62,22 +66,26 @@
 						h3.index__rcm--ttl {{item.title}}
 						p.index__rcm--catchphrase  {{item.catchphrase}}
 					p.index__rcm--txt {{item.text}}
-					div.index__rcm--lang
-						div(v-for="(lang,langKey) in item.lang",:key="langKey")
-							img(:src="`${path}img/lang_${lang}.svg`",:alt="`${lang}`")
+					div.index__rcm--list
+						div
+							span 使用言語
+							span(v-for="(lang,langKey) in item.lang",:key="langKey") {{lang}}
+						div
+							span 役割分担
+							span(v-for="(role,roleKey) in item.role",:key="roleKey") {{role}}
 					div.index__rcm--link
 						a(v-for="(link,linkKey) in item.link.slice(0,2)",:key="linkKey",:href="`${link.url}`",target="page")
 							span {{link.name}}
-						router-link(:to="`${routerPath}web/${res.length}/`")
+						router-link(:to="`${routerPath}web/${item.img}`")
 							span more
 				div.index__rcm--img
-					img(:src="`${path}img/index_rcm_mock.png`",alt="Gifcle")
+					img(:src="`${path}img/index_rcm_mock.png`",alt="raict")
 		FadeIn
 			ul.index__logo
-				li(v-for="(ttl,i) in rcmPath")
-					router-link(:to="`${routerPath}web/${rcmId[i]}`")
-						img(:src="`${path}img/index_logo_${i+1}.svg`",:alt="rcmAlt[i]")
-						img(:src="`${path}img/index_logo_${i+1}_on.svg`",:alt="rcmAlt[i]")
+				li(v-for="(item,i) in rcmWorks")
+					router-link(:to="`${routerPath}web/${item.path}`")
+						img(:src="`${path}img/index_logo_${i+1}.svg`",:alt="item.alt")
+						img(:src="`${path}img/index_logo_${i+1}_on.svg`",:alt="item.alt")
 		FadeIn
 			router-link(:to="{name:'Web'}",@mouseover="worksBnrOver",@mouseleave="worksBnrLeave").index__work
 				span {{worksBnrTxt[worksBnrNum]}}
@@ -111,11 +119,33 @@ export default {
   data() {
     return {
       res: [],
-      langData: ["Pug", "Sass", "JavaScript", "Vue", "HTML5", "CSS3"],
+      langData: ["Vue.js", "Pug", "Sass", "JavaScript", "HTML5", "CSS3"],
       rcmData: 0,
-      rcmPath: ["fribo", "userella", "jishatecho", "gifcle", "minicomi"],
-      rcmAlt: ["Fribo", "userella", "寺社手帖", "Gifcle", "ミニコミ！"],
-      rcmId: [8, 5, 9, 3, 6],
+      rcmWorks: [
+        {
+          path: "fribo",
+          alt: "Fribo",
+        },
+        {
+          path: "userella",
+          alt: "userella",
+        },
+        {
+          path: "jishatecho",
+          alt: "寺社手帖",
+        },
+        {
+          path: "gifcle",
+          alt: "Gifcle",
+        },
+        {
+          path: "minicomi",
+          alt: "ミニコミ！",
+        },
+      ],
+      // rcmPath: ["fribo", "userella", "jishatecho", "gifcle", "minicomi"],
+      // rcmAlt: ["Fribo", "userella", "寺社手帖", "Gifcle", "ミニコミ！"],
+      // rcmId: [8, 5, 9, 3, 6],
       worksBnrTxt: ["作品をもっとご覧になりませんか？", "view more!"],
       worksBnrNum: 0,
       slogan: "チームの軸を支えられるフロントエンドエンジニアになるために。",
@@ -129,9 +159,11 @@ export default {
   methods: {
     worksBnrOver() {
       this.worksBnrNum = 1;
+      console.log(this.worksBnrTxt[this.worksBnrNum]);
     },
     worksBnrLeave() {
       this.worksBnrNum = 0;
+      console.log(this.worksBnrTxt[this.worksBnrNum]);
     },
     handleScroll() {
       this.scrollY = window.scrollY;
@@ -384,21 +416,40 @@ sloganここまで
         font-weight: bold;
       }
     }
-    ul {
+    &--skills {
       display: flex;
+      font-family: $font;
       margin-top: 16px;
-      li {
-        height: 32px;
-        margin-right: 8px;
-        img {
-          height: 100%;
-          object-fit: contain;
-        }
-        &:last-of-type {
-          margin: 0;
+      font-weight: bold;
+      span {
+        color: $mainColor;
+      }
+      ul {
+        display: flex;
+        li {
+          &:not(:last-of-type) {
+            &::after {
+              content: "／";
+            }
+          }
         }
       }
     }
+    // ul {
+    //   display: flex;
+    //   margin-top: 16px;
+    //   li {
+    //     height: 32px;
+    //     margin-right: 8px;
+    //     img {
+    //       height: 100%;
+    //       object-fit: contain;
+    //     }
+    //     &:last-of-type {
+    //       margin: 0;
+    //     }
+    //   }
+    // }
   }
   &--link {
     display: flex;

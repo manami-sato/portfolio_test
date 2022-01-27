@@ -9,9 +9,16 @@
 				p.data__description--catchphrase {{data.catchphrase}}
 				h1.data__description--ttl {{data.title}}
 				p.data__description--txt {{data.text}}
-				div.data__description--lang
-					div(v-for="item in data.lang",:key="item")
-						img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
+				div.data__description--list
+					div
+						span 使用言語
+						span(v-for="(lang,langKey) in data.lang",:key="langKey") {{lang}}
+					div
+						span 役割分担
+						span(v-for="(role,roleKey) in data.role",:key="roleKey") {{role}}
+				//- div.data__description--lang
+				//- 	div(v-for="item in data.lang",:key="item")
+				//- 		img(:src="`${path}img/lang_${item}.svg`",:alt="`${item}`")
 		section.data__detail
 			h2.data__detail--ttl {{data.headline}}
 			div
@@ -21,9 +28,9 @@
 				section.data__detail--appeal
 					h3.data__detail--appeal--ttl フロントエンドにおける技術目標
 					p.data__detail--appeal--txt {{data.target}}
-				section.data__detail--appeal
+				//- section.data__detail--appeal
 					h3.data__detail--appeal--ttl 反省と次回に活かすこと
-					p.data__detail--appeal--txt {{data.introspection}}
+					p.data__detail--appeal--txt data.introspection}}
 		div.data__link
 			a(v-for="(link,i) in data.link",:key="data.link[i].id",:href="data.link[i].url",target="page")
 				span {{data.link[i].name}}
@@ -38,9 +45,9 @@ import Mixin from "@/mixins/Mixin.vue";
 export default {
   name: "Data",
   mixins: [Mixin],
-  props: {
-    id: Number,
-  },
+  // props: {
+  //   id: Number,
+  // },
   data() {
     return {
       res: [],
@@ -80,13 +87,19 @@ export default {
     },
   },
   mounted() {
-    this.dataId = this.$route.params.id - 1;
+    console.log(this.$route.params.id);
+    // this.dataId = this.$route.params.id - 1;
     fetch(`${this.productsData}`)
       .then((res) => {
         return res.json();
       })
       .then((json) => {
         this.res = json.web;
+        for (let i = 0; i < this.res.length; i++) {
+          if (this.res[i].img == this.$route.params.id) {
+            this.dataId = i;
+          }
+        }
         this.data = this.res[this.dataId];
         this.color = this.data.color;
         document.title = this.data.title + `｜佐藤真奈実's Portfolio`;
