@@ -6,11 +6,11 @@
 				span manamisato2001@gmail.com
 		div(:style="{backgroundImage:'url(' + path + 'img/foot.png)'}").foot__link
 			router-link(:to="{name:'Home'}").foot__link--index
-				img(:src="`${path}img/logo.png`",alt="佐藤真奈実' Portfolio")
+				img(:src="`${path}img/logo.png`",alt="佐藤真奈実's Portfolio")
 			ul
 				//- li
 					router-link(:to="{name:'Home'}")
-						img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
+						img(:src="`${path}img/logo.svg`",alt="佐藤真奈実's Portfolio")
 				//- li
 					router-link(:to="{name:'Web'}") works
 				li
@@ -169,11 +169,21 @@ small {
   }
 }
 @media screen and (max-width: 650px) {
-  .foot__contact {
-    padding: 80px 0;
-    &--mail {
-      width: 80vw;
-      @include btn($fs: 1.8rem, $h: 72px);
+  .foot {
+    &__contact {
+      padding: 80px 0;
+      &--mail {
+        width: 80vw;
+        @include btn($fs: 1.8rem, $h: 72px);
+      }
+    }
+    &__link {
+      justify-content: center;
+      background-size: 120%;
+      padding: 0 8vw 56px;
+      ul {
+        display: none;
+      }
     }
   }
 }

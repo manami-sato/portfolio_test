@@ -54,7 +54,6 @@ export default {
       .then((json) => {
         this.res = json.practice;
       });
-    console.log(this.getSortNum);
   },
 };
 </script>
@@ -109,6 +108,15 @@ export default {
         width: 100%;
         @include btnHoverAction($bg: $accentColor, $c: $white);
       }
+    }
+  }
+}
+@media screen and (max-width: 650px) {
+  .practice {
+    flex-direction: column;
+    min-width: 80%;
+    article {
+      min-width: 100%;
     }
   }
 }

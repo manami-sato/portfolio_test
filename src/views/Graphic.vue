@@ -43,7 +43,7 @@
 							div.graphic__info--sort 1年前期
 						div.graphic__info--tool 使用ツール：Illustrator
 						div.graphic__info--txt オリジナルのお香を注文することができる<br>サービスのポスターです。
-						router-link(:to="`${routerPath}web/1`").graphic__info--link
+						router-link(:to="`${routerPath}web/koka`").graphic__info--link
 							span サイトを見る
 				section#candleNight.poster
 					div.graphic__img
@@ -66,7 +66,7 @@
 								div.graphic__info--sort 1年後期
 							div.graphic__info--tool 使用ツール：Illustrator／Photoshop
 							div.graphic__info--txt 電車内及び駅等に掲示していただく想定で<br>電子広告を制作しました。
-							router-link(:to="`${routerPath}web/3`").graphic__info--link
+							router-link(:to="`${routerPath}web/jishatecho`").graphic__info--link
 								span サイトを見る
 				section#seinen
 					div.graphic__img
@@ -86,7 +86,7 @@
 							div.graphic__info--sort 1年後期
 						div.graphic__info--tool 使用ツール：Illustrator／Photoshop
 						div.graphic__info--txt LPサイトからアプリLPサイトに<br>飛んでもらう際のバナーです。
-						router-link(:to="`${routerPath}web/5`").graphic__info--link
+						router-link(:to="`${routerPath}web/userella`").graphic__info--link
 							span サイトを見る
 				section#utakata
 					div.graphic__img
@@ -331,6 +331,69 @@ export default {
   .graphic__info {
     width: 30%;
     margin: 50px 0;
+  }
+}
+@media screen and (max-width: 650px) {
+  .graphic {
+    > div {
+      flex-direction: column;
+    }
+    section {
+      flex-direction: column;
+      margin: 0 0 80px;
+    }
+  }
+  .poster {
+    width: 100%;
+    min-width: 100%;
+  }
+  .businessCard {
+    // flex-direction: column;
+    flex-wrap: nowrap;
+    .graphic__info {
+      margin: 50px 0 0;
+    }
+    .graphic__img {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+  .businessCard2 {
+    width: 100%;
+    .graphic__info {
+      width: 100%;
+      margin: 50px 0 0;
+      order: 2;
+    }
+    .graphic__img {
+      width: 100%;
+      order: 1;
+    }
+  }
+  #userella {
+    width: 100%;
+    min-width: auto;
+  }
+  #utakata {
+    height: auto;
+    > div {
+      min-width: 100%;
+    }
+  }
+  #jishatecho {
+    .graphic__img {
+      width: 100%;
+    }
+    .jishatecho__wrap--2 {
+      width: 100%;
+      .graphic__img {
+        width: 70%;
+        margin: 32px auto 0;
+      }
+    }
+  }
+  #seinen {
+    width: 100%;
   }
 }
 </style>

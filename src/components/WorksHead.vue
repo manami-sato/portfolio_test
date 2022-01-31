@@ -136,4 +136,14 @@ export default {
     }
   }
 }
+@media screen and (max-width: 650px) {
+  .head {
+    margin-bottom: 64px;
+    &__sort {
+      &--item {
+        margin: 0;
+      }
+    }
+  }
+}
 </style>

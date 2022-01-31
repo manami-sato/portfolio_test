@@ -3,7 +3,7 @@
 		nav.index__nav
 			header.index__nav--logo
 				a(href="#")
-					img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
+					img(:src="`${path}img/logo.png`",alt="佐藤真奈実's Portfolio")
 			ul.index__nav--link
 				li
 					a(href="#about") about
@@ -15,7 +15,7 @@
 			div.index__fv--illust
 			div
 				h1.index__fv--logo
-					img(:src="`${path}img/logo.svg`",alt="佐藤真奈実' Portfolio")
+					img(:src="`${path}img/logo.png`",alt="佐藤真奈実's Portfolio")
 				div
 					div.index__fv--scroll
 						svg(version="1.1",xmlns="http://www.w3.org/2000/svg",xmlns:xlink="http://www.w3.org/1999/xlink",x="0px",y="0px",viewBox="0 0 24 24",style="enable-background:new 0 0 24 24;",xml:space="preserve")
@@ -159,11 +159,9 @@ export default {
   methods: {
     worksBnrOver() {
       this.worksBnrNum = 1;
-      console.log(this.worksBnrTxt[this.worksBnrNum]);
     },
     worksBnrLeave() {
       this.worksBnrNum = 0;
-      console.log(this.worksBnrTxt[this.worksBnrNum]);
     },
     handleScroll() {
       this.scrollY = window.scrollY;
@@ -217,9 +215,9 @@ fvここから
     }
   }
   &--logo {
+    display: flex;
     width: 100%;
     height: 200px;
-    margin-bottom: 56px;
     & + div {
       display: flex;
       justify-content: space-around;
@@ -616,6 +614,9 @@ backここまで
     width: 80vw;
     max-width: 1200px;
     min-height: 80vh;
+    &--logo {
+      margin-bottom: 56px;
+    }
   }
   .index__slogan {
     margin-top: 104px;
@@ -687,7 +688,7 @@ backここまで
 @media screen and (max-width: 1000px) {
   .index__fv {
     width: 80vw;
-    min-height: 70vh;
+    height: 60vh;
   }
   .index__slogan {
     margin: 64px auto;
@@ -752,11 +753,23 @@ backここまで
 @media screen and (max-width: 650px) {
   .index__fv {
     width: 100vw;
-    height: 60vh;
-    background-size: contain;
-    background-position: 0 80px;
+    height: 70vh;
+    background-size: cover;
+    background-position: left 10% top 0;
+    // background-position: 0 80px;
+    &--illust + div {
+      width: 95%;
+      margin-right: 5%;
+    }
+    &--logo {
+      margin-top: 72px;
+    }
+  }
+  .index__nav {
+    display: none;
   }
   .index__slogan {
+    width: 90%;
     margin: 80px auto 0;
   }
   .index__profile {
@@ -768,6 +781,7 @@ backここまで
       margin: 0 auto;
     }
     &--txt {
+      width: 90%;
       margin: 64px auto;
     }
     &--link {
@@ -783,8 +797,16 @@ backここまで
     @include worksPreset();
     @include throughTtl("</recommend works>", 12%, auto, auto, -3%, $fs: 6rem);
     width: 90%;
+    overflow: hidden;
     &--img {
       width: 90%;
+      margin: 0 auto;
+    }
+    &--headline + div {
+      display: flex;
+    }
+    &--link {
+      justify-content: center;
     }
   }
   .index__logo {

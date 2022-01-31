@@ -87,8 +87,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$route.params.id);
-    // this.dataId = this.$route.params.id - 1;
     fetch(`${this.productsData}`)
       .then((res) => {
         return res.json();
